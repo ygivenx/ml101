@@ -1,17 +1,17 @@
 # Welcome to ML101
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to our training!
 
-## Commands
+## About this training
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+In this training you will be learning the basics of ML through IBM Cloud Pak for Data.
 
-## Project layout
+## Agenda
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+| Topic | Description | Type |
+| :--- | :--- | :--- |
+| General Introduction | ML101 Introduction | Lecture |
+| Platform Overview | Cloud Pak for Data overview | Lecture |
+| AutoAI | Environment provisioning and setup | Hands-on lab |
+| Unstructured Data Analysis on R Studio | RStudio overview | Hands-on lab |
+| Custom Model Deployment | Deploying a custom model using Jupyter notebooks | Hands-on lab |

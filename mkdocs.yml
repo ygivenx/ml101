@@ -1,4 +1,34 @@
+# Project information
 site_name: ML101
-site_url: 
+site_url: https://github.mskcc.org/pages/aiml/ml101/
+
+# Repo
+repo_name: ml101
+repo_url: https://github.mskcc.org/aiml/ml101
+edit_uri: edit/master/docs
+
+# Navigation
+nav:
+  - Welcome:
+    - About the training: index.md
+  - Training:
+    - Introduction to ML: introduction-to-ml.md
+    - CP4D Overview: introduction-to-cp4d.md
+    - AutoAI:
+      - Introduction: autoai.md
+      - About the data set: servicenow-dataset.md
+    - Unstructured Data Analysis on R Studio: unstructured-data-analysis-on-rstudio.md
+    - Custom Model Deployment: custom-model-deployment.md
+  - Training Resources:
+    - Resources: resources.md
+
+# Theme
 theme:
   name: material
+  features:
+    - navigation.tabs
+  palette:
+    scheme: default
+    primary: blue
+    accent: blue
+  logo: logo.svg
