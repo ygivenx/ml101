@@ -1,0 +1,7 @@
+site_name: AI/ML Solutions
+site_url:
+theme:
+   name: material
+nav:
+   - Home: index.md
+   - About: about.md
