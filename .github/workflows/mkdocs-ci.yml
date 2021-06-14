@@ -9,6 +9,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - run: scl enable rh-python36 bash
+      - run: yum install rh-python36
       - run: pip install mkdocs-material
       - run: mkdocs gh-deploy
