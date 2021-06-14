@@ -30,7 +30,7 @@ This CSV file contains incident dimension data.
 | description | Used to expand on the `short_description`. It should be used to add context to the issue reported. **May contain PHI** | String |
 | close_code | Resolution code. Example: **Solved (Permanently)**, **Closed/Resolved by Caller** | String |
 | close_notes | Resolution information. Defines what was done to resolve the incident | String |
-| resolver_by.employee number | Employee ID that resolved the issue | String |
+| resolved_by.employee_number | Employee ID that resolved the issue | String |
 | resolved_at | Time when the issues was marked as resolved | Timestamp |
 | work_notes | Updates to the form | String |
 
