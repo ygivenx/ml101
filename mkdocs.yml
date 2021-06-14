@@ -12,13 +12,15 @@ nav:
   - Welcome:
     - About the training: index.md
   - Training:
-    - Introduction to ML: introduction-to-ml.md
-    - CP4D Overview: introduction-to-cp4d.md
-    - AutoAI:
-      - Introduction: autoai.md
+    # - Introduction to ML: introduction-to-ml.md
+    # - CP4D Overview: introduction-to-cp4d.md
+    - Predict incident resolution time with AutoAI:      
       - About the data set: servicenow-dataset.md
-    - Unstructured Data Analysis on R Studio: unstructured-data-analysis-on-rstudio.md
-    - Custom Model Deployment: custom-model-deployment.md
+      - Data processing with Data Refinery: data-refinery.md
+      - AutoAI experiment: autoai.md
+      - Deploying and consuming models: wml.md
+    - Unstructured Data Analysis on RStudio: unstructured-data-analysis-on-rstudio.md
+    - Predict incident resolution time with Watson Studio Jupyter notebooks: custom-model-deployment.md
   - Training Resources:
     - Resources: resources.md
 
