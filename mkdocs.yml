@@ -1,5 +1,5 @@
 # Project information
-site_name: ML101
+site_name: ML101 Training
 site_url: https://github.mskcc.org/pages/aiml/ml101/
 
 # Repo
@@ -10,17 +10,15 @@ edit_uri: edit/master/docs
 # Navigation
 nav:
   - Welcome:
-    - About the training: index.md
+    - About the training: README.md
   - Training:
-    # - Introduction to ML: introduction-to-ml.md
-    # - CP4D Overview: introduction-to-cp4d.md
     - Predict incident resolution time with AutoAI:      
-      - About the data set: servicenow-dataset.md
-      - Data processing with Data Refinery: data-refinery.md
-      - AutoAI experiment: autoai.md
-      - Deploying and consuming models: wml.md
-    - Unstructured Data Analysis on RStudio: unstructured-data-analysis-on-rstudio.md
-    - Predict incident resolution time with Watson Studio Jupyter notebooks: custom-model-deployment.md
+      - About the data set: autoai/servicenow-dataset.md
+      - Data processing with Data Refinery: autoai/data-refinery.md
+      - Model building with AutoAI: autoai/autoai.md
+      - Deploying and consuming models: autoai/wml.md
+    - Unstructured Data Analysis on RStudio: rstudio/unstructured-data-analysis-on-rstudio.md
+    - Predict incident resolution time with Watson Studio Jupyter notebooks: jupyter/custom-model-deployment.md
   - Training Resources:
     - Resources: resources.md
 
@@ -33,4 +31,4 @@ theme:
     scheme: default
     primary: blue
     accent: blue
-  logo: logo.svg
+  logo: images/logo.svg
