@@ -1,0 +1,835 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.mskcc.org/pages/aiml/ml101/autoai/autoai/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Model building with AutoAI - ML101 Training</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#automate-model-building-with-autoai" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ML101 Training" class="md-header__button md-logo" aria-label="ML101 Training" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ML101 Training
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Model building with AutoAI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.mskcc.org/aiml/ml101/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ml101
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Welcome
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../servicenow-dataset/" class="md-tabs__link md-tabs__link--active">
+        Training
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../resources/" class="md-tabs__link">
+        Training Resources
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ML101 Training" class="md-nav__button md-logo" aria-label="ML101 Training" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    ML101 Training
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.mskcc.org/aiml/ml101/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ml101
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Welcome
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Welcome" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Welcome
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        About the training
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Training
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Training" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Training
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        Predict incident resolution time with AutoAI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predict incident resolution time with AutoAI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Predict incident resolution time with AutoAI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servicenow-dataset/" class="md-nav__link">
+        About the data set
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-refinery/" class="md-nav__link">
+        Data processing with Data Refinery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Model building with AutoAI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Model building with AutoAI
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-autoai-experiment" class="md-nav__link">
+    Create an AutoAI Experiment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-and-promote-autoai-model" class="md-nav__link">
+    Save and Promote AutoAI Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-autoai-notebooks" class="md-nav__link">
+    Save AutoAI notebooks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wml/" class="md-nav__link">
+        Deploying and consuming models
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-nav__link">
+        Unstructured Data Analysis on RStudio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/custom-model-deployment/" class="md-nav__link">
+        Predict incident resolution time with Watson Studio Jupyter notebooks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Training Resources
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Training Resources" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Training Resources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-autoai-experiment" class="md-nav__link">
+    Create an AutoAI Experiment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-and-promote-autoai-model" class="md-nav__link">
+    Save and Promote AutoAI Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-autoai-notebooks" class="md-nav__link">
+    Save AutoAI notebooks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.mskcc.org/aiml/ml101/edit/master/docs/autoai/autoai.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="automate-model-building-with-autoai">Automate model building with AutoAI</h1>
+<p>In this module, we'll learn how to use <a href="https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/autoai-overview.html?audience=wdp">AutoAI</a>. The AutoAI tool is a capability that automates various tasks to ease the workflow for data scientists that are creating machine learning models. AutoAI automatically analyzes your data and generates candidate model pipelines customized for your predictive modeling problem.  These model pipelines are created iteratively as AutoAI analyzes your dataset and discovers data transformations, algorithms, and parameter settings that work best for your problem setting.</p>
+<p>This section is broken up into the following steps:</p>
+<ol>
+<li><a href="#create-an-autoai-experiment">Run AutoAI Experiment</a></li>
+<li><a href="#save-and-promote-autoai-model">Save and Promote AutoAI Model</a></li>
+<li><a href="#save-autoai-notebooks">Save AutoAI Notebooks</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.</p>
+<p><strong>Note:</strong> The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space.</p>
+</blockquote>
+<h2 id="create-an-autoai-experiment">Create an AutoAI Experiment</h2>
+<ul>
+<li>
+<p>Go the (☰) navigation menu, expand <code>Projects</code> and click on the project you created during the setup section.</p>
+<p><a href="../../images/navigation/menu-projects.png"><img alt="(☰) Menu -&gt; your project" src="../../images/navigation/menu-projects.png" /></a></p>
+</li>
+<li>
+<p>To start the AutoAI experiment, click the <code>Add to project +</code> button from the top of the page and select the <code>AutoAI experiment</code> option.</p>
+<p><a href="../../images/autoai/autoai-add-project.png"><img alt="Adding a project" src="../../images/autoai/autoai-add-project.png" /></a></p>
+</li>
+<li>
+<p>Give the AutoAI experiment any name you like. The associated Watson Machine Learning Service Instance should already be populated for you. If not, please select the one that you created in the setup section from the drop down. Then click the <code>Create</code> button.</p>
+<p><a href="../../images/autoai/autoai-name-experiment.png"><img alt="Naming your experiment" src="../../images/autoai/autoai-name-experiment.png" /></a></p>
+</li>
+<li>
+<p>To configure the experiment, we must first give it the dataset that will be used to train the machine learning model. Click on the <code>Select from project</code> button to point to a dataset in your project.</p>
+</li>
+<li>
+<p>Now we can select the training CSV file. If you completed the previous <strong><em>Data Processing with Data Refinery</em></strong> lab module where you generated a single shaped CSV file from a refinery job, select that CSV file (the name will be whatever you selected in that module, for example: <code>incident_shaped</code>).</p>
+<p><a href="../../images/autoai/autoai-select-dataset.png"><img alt="Select data" src="../../images/autoai/autoai-select-dataset.png" /></a></p>
+</li>
+<li>
+<p>If you are presented with a prompt to create a time series forecast, click the <code>No</code> button.</p>
+<p><a href="../../images/autoai/autoai-no-forecast.png"><img alt="No forecast" src="../../images/autoai/autoai-no-forecast.png" /></a></p>
+</li>
+<li>
+<p>Now, we will need to indicate what we want the model to predict. Under <code>What do you want to predict?</code> panel, select the <code>Prediction column</code> as <code>inc_business_duration</code>.</p>
+</li>
+<li>
+<p>AutoAI will set up defaults values for the experiment based on the dataset and the column selected for the prediction. This includes the type of model to build, the metrics to optimize against, the test/train split, etc. To view/change these values, click the <em><code>Experiment settings</code></em> button.</p>
+<p><a href="../../images/autoai/autoai-choose-prediction-and-configure.png"><img alt="Choose Churn column and run" src="../../images/autoai/autoai-choose-prediction-and-configure.png" /></a></p>
+</li>
+<li>
+<p>Click on the <code>Data source</code> tab and scroll down to the <code>Select features to include</code> section. Deselect the checkbox for the <code>number</code> column name. This will remove the incident number column from being used as a feature for the model. Although we could change other aspects of the experiment, we will accept the remaining default values and click the <code>Save settings</code> button. (<em>Feel free to explore the other possible settings before clicking the save button</em>).</p>
+<p><a href="../../images/autoai/autoai-exp-settings-columns.png"><img alt="Choose features and save" src="../../images/autoai/autoai-exp-settings-columns.png" /></a></p>
+</li>
+<li>
+<p>To start the experiment, click on the <code>Run experiment</code> button.</p>
+<p><a href="../../images/autoai/autoai-exp-run.png"><img alt="Run experiment" src="../../images/autoai/autoai-exp-run.png" /></a></p>
+</li>
+<li>
+<p>The AutoAI experiment will now run. AutoAI will run through steps to prepare the dataset, split the dataset into training / evaluation groups and then find the best performing algorithms / estimators for the type of model. It will then build the following series of candidate pipelines for each of the top N performing algorithms (where N is a number chosen in the configuration which defaults to 2):</p>
+<ul>
+<li>Baseline model (Pipeline 1)</li>
+<li>Hyperparameter optimization (Pipeline 2)</li>
+<li>Automated feature engineering (Pipeline 3)</li>
+<li>Hyperparameter optimization on top of engineered features (Pipeline 4)</li>
+</ul>
+</li>
+<li>
+<p>The UI will show progress as different algorithms/evaluators are selected and as different pipelines are created and evaluated. You can view the performance of the pipelines that have completed by expanding each pipeline section in the leaderboard.</p>
+<p><a href="../../images/autoai/autoai-pipeline-progress.png"><img alt="autoai progress" src="../../images/autoai/autoai-pipeline-progress.png" /></a></p>
+</li>
+<li>
+<p>The experiment can take several minutes to complete. Upon completion you will see a message that the pipelines have been created. Do not proceed to the next section until the experiment completes.</p>
+</li>
+</ul>
+<h2 id="save-and-promote-autoai-model">Save and Promote AutoAI Model</h2>
+<ul>
+<li>
+<p>Once the experiment completes, you can explore the various pipelines and options in the UI. Some of the options available are to see a comparison of the pipelines, to change the ranking based on a different performance metric, to see a log of the experiment, or to see the ranked listing of the pipelines (ranking based on the optimization metric in your experiment, in this case, accuracy).</p>
+<p><a href="../../images/autoai/autoai-pipelines-complete.png"><img alt="autoai pipelines created" src="../../images/autoai/autoai-pipelines-complete.png" /></a></p>
+</li>
+<li>
+<p>Scroll down to see the <code>Pipeline leaderboard</code>. The top performing pipeline is in the first rank.</p>
+</li>
+<li>
+<p>The next step is to select the model that gives the best result and view its performance. In this case, Pipeline 3 gave the best result for our experiment. You can view the detailed results by clicking the corresponding pipeline name from the leaderboard:</p>
+<p><a href="../../images/autoai/autoai-pipeline-leaderboard-topranked.png"><img alt="pipeline leaderboard" src="../../images/autoai/autoai-pipeline-leaderboard-topranked.png" /></a></p>
+</li>
+<li>
+<p>The model evaluation page will show metrics for the experiment, confusion matrix, feature transformations that were performed (if any), which features contribute to the model, and more details of the pipeline. Optionally, feel free to click through these views of the pipeline details.</p>
+<p><a href="../../images/autoai/autoai-toppipeline-details.png"><img alt="Model evaluation" src="../../images/autoai/autoai-toppipeline-details.png" /></a></p>
+</li>
+<li>
+<p>In order to deploy this model, click on the <em><code>Save as</code></em> button. On the next scren, select the <code>Model</code> option. Keep the default name, add an optional description and tags, and click the <code>Create</code> button to save the model.</p>
+<p><img alt="Save model" src="../../images/autoai/autoai-pipeline-save-model.png" /></p>
+</li>
+<li>
+<p>You will see a notification to indicate that your model is saved to your project. Click the <code>View in project</code> link in the notification to go to the saved model. (<em>Alternatively, if you navigate back to your project assets tab by closing the pipeline and AutoAI experiment, you will see the saved model in the <code>Models</code> section, which you can click on to explore</em>).</p>
+<p><img alt="Go to model" src="../../images/autoai/autoai-save-notification.png" /></p>
+</li>
+<li>
+<p>To make the model available to be deployed, we need to make it available in the deployment space you created during the setup module. Click on the <code>Promote to deployment space</code>:</p>
+<p><a href="../../images/autoai/autoai-promote-to-space.png"><img alt="Deploying the model" src="../../images/autoai/autoai-promote-to-space.png" /></a></p>
+</li>
+<li>
+<p>Select the deployment space that was created as part of the setup module as the <code>Target space</code> and click <code>Promote</code>.</p>
+<p><a href="../../images/autoai/autoai-promote-to-space-confirm.png"><img alt="Promote model" src="../../images/autoai/autoai-promote-to-space-confirm.png" /></a></p>
+</li>
+<li>
+<p>You will be brought back to your project assets page and see a notification that the model was promoted to the deployment space succesfully. Feel free to close that notification.</p>
+</li>
+</ul>
+<h2 id="save-autoai-notebooks">Save AutoAI notebooks</h2>
+<p>In addition to saving models, we now have the ability to save a Jupyter notebook with working code. This can be the code representation of the AutoAI experiment (with access to all of the generated pipelines), or it can be the implementation of a specific pipeline. Let's explore how we can save both the experiment and a pipeline as a notebook.</p>
+<ul>
+<li>
+<p>To save the AutoAI experiment as a notebook, navigate back to the AutoAI experiment overview page by clicking on the AutoAI experiment name in your project assets page (under the <code>AutoAI experiments</code> section).</p>
+</li>
+<li>
+<p>Click on the <code>Save code</code> link in the 'Progress map' section of the UI.</p>
+<p><a href="../../images/autoai/autoai-experiment-save-code.png"><img alt="Save notebook" src="../../images/autoai/autoai-experiment-save-code.png" /></a></p>
+</li>
+<li>
+<p>Leave the default name and click the <code>Create</code> button to save the experiment as a notebook.</p>
+<p><a href="../../images/autoai/autoai-experiment-save-code-create.png"><img alt="Save notebook" src="../../images/autoai/autoai-experiment-save-code-create.png" /></a></p>
+</li>
+<li>
+<p>To save the AutoAI pipeline as a notebook, from the experiment overview page, scroll down to the pipeline leader board section. Then hover over the right side of one of the other pipelines and click the resulting <code>Save as</code> button. For sake of demonstration, we are going to save a pipeline for an algorithm that is different from the model we saved in the previous section (i.e in this case Pipeline 7).</p>
+<p><a href="../../images/autoai/autoai-pipeline-for-notebook.png"><img alt="Save notebook" src="../../images/autoai/autoai-pipeline-for-notebook.png" /></a></p>
+</li>
+<li>
+<p>Choose the <code>Notebook</code> tile, accept the default name, add an optional description, and click the <code>Create</code> button.</p>
+<p><a href="../../images/autoai/autoai-save-as-notebook.png"><img alt="Name and create notebook" src="../../images/autoai/autoai-save-as-notebook.png" /></a></p>
+</li>
+<li>
+<p>You will receive a notification to indicate that your notebook is saved to your project. Close the notification and then click on your project name in the project path at the top of the screen.</p>
+<p><a href="../../images/autoai/autoai-navigate-to-project.png"><img alt="Navigate to Project" src="../../images/autoai/autoai-navigate-to-project.png" /></a></p>
+</li>
+<li>
+<p>The notebook will be saved to your project, and can be examined in detail, changed and modified, and used to create a new model. See the instructions in the <a href="./running-autoai-notebook.md">Modifying and running an AutoAI generated notebook</a> lab for details.</p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Congratulation. We have now successfully created a highly optimized machine learning model using AutoAI and prepared it for deployment.</p>
+<p>In this section we covered one approach to building machine learning models on Cloud Pak for Data as a Service. We have seen how AutoAI helps to find an optimal model by automating tasks such as:</p>
+<ul>
+<li>Data Wrangling</li>
+<li>Algorithm Evaluation &amp; Selection</li>
+<li>Feature Engineering</li>
+<li>Hyperparameter Optimization</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../data-refinery/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Data processing with Data Refinery" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Data processing with Data Refinery
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../wml/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying and consuming models" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Deploying and consuming models
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>

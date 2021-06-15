@@ -1,0 +1,920 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.mskcc.org/pages/aiml/ml101/autoai/data-refinery/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Data processing with Data Refinery - ML101 Training</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-processing-with-data-refinery" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ML101 Training" class="md-header__button md-logo" aria-label="ML101 Training" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ML101 Training
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data processing with Data Refinery
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.mskcc.org/aiml/ml101/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ml101
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Welcome
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../servicenow-dataset/" class="md-tabs__link md-tabs__link--active">
+        Training
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../resources/" class="md-tabs__link">
+        Training Resources
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ML101 Training" class="md-nav__button md-logo" aria-label="ML101 Training" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    ML101 Training
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.mskcc.org/aiml/ml101/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ml101
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Welcome
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Welcome" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Welcome
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        About the training
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Training
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Training" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Training
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        Predict incident resolution time with AutoAI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predict incident resolution time with AutoAI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Predict incident resolution time with AutoAI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servicenow-dataset/" class="md-nav__link">
+        About the data set
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Data processing with Data Refinery
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Data processing with Data Refinery
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#merge-and-cleanse-data" class="md-nav__link">
+    Merge and Cleanse Data
+  </a>
+  
+    <nav class="md-nav" aria-label="Merge and Cleanse Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-data-flow-job" class="md-nav__link">
+    Run Data Flow Job
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profile-data" class="md-nav__link">
+    Profile Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-data" class="md-nav__link">
+    Visualize Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoai/" class="md-nav__link">
+        Model building with AutoAI
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wml/" class="md-nav__link">
+        Deploying and consuming models
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-nav__link">
+        Unstructured Data Analysis on RStudio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/custom-model-deployment/" class="md-nav__link">
+        Predict incident resolution time with Watson Studio Jupyter notebooks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Training Resources
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Training Resources" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Training Resources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#merge-and-cleanse-data" class="md-nav__link">
+    Merge and Cleanse Data
+  </a>
+  
+    <nav class="md-nav" aria-label="Merge and Cleanse Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-data-flow-job" class="md-nav__link">
+    Run Data Flow Job
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profile-data" class="md-nav__link">
+    Profile Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-data" class="md-nav__link">
+    Visualize Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.mskcc.org/aiml/ml101/edit/master/docs/autoai/data-refinery.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="data-processing-with-data-refinery">Data Processing with Data Refinery</h1>
+<p>In this module, we will prepare our data assets for analysis. We will use the <code>Data Refinery</code> graphical flow editor tool to create a set of ordered operations that will cleanse and shape our data. We will also explore the graphical interface to profile data and create visualizations to get a perspective and insights into the dataset.</p>
+<p>This section is broken up into the following steps:</p>
+<ol>
+<li><a href="#merge-and-cleanse-data">Merge and Cleanse Data</a></li>
+<li><a href="#profile-data">Profile Data</a></li>
+<li><a href="#visualize-data">Visualize Data</a></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.</p>
+<p><strong>Note:</strong> The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space.</p>
+</blockquote>
+<h2 id="merge-and-cleanse-data">Merge and Cleanse Data</h2>
+<p>We will start by wrangling, shaping and refining our data. To do this, we will create a refinery flow to contain a series of data transformation steps.</p>
+<ul>
+<li>
+<p>Go the (☰) navigation menu, expand <code>Projects</code> and click on the project you created during the setup section.</p>
+<p><a href="../../images/navigation/menu-projects.png"><img alt="(☰) Menu -&gt; your project" src="../../images/navigation/menu-projects.png" /></a></p>
+</li>
+<li>
+<p>To create a data refinery flow, click the <code>Add to project</code> button from the top of the page and click the <code>Data Refinery flow</code> option.</p>
+<p><a href="../../images/dr/dr-create-flow.png"><img alt="Create DR Flow" src="../../images/dr/dr-create-flow.png" /></a></p>
+</li>
+<li>
+<p>Select <code>Data assets</code> on the left panel, then select the <code>incident.csv</code> data asset. Then click the <code>Add</code> button.</p>
+<p><a href="../../images/dr/dr-flow-add-asset.png"><img alt="Add Asset to DR Flow" src="../../images/dr/dr-flow-add-asset.png" /></a></p>
+</li>
+<li>
+<p>The first thing we want to do is create a merged dataset. Start by joining the incident data with information about the incident SLA. Click the <code>Operation</code> button on the top left and then scroll down and select the <code>Join</code> operation.</p>
+<p><a href="../../images/dr/dr-flow-join-operation.png"><img alt="Join operation" src="../../images/dr/dr-flow-join-operation.png" /></a></p>
+</li>
+<li>
+<p>From the drop down list, select <code>Inner join</code> and then click the <code>Add data set</code> link to select the data asset you are going to join with.</p>
+<p><a href="../../images/dr/dr-flow-join-params1.png"><img alt="Select inner join" src="../../images/dr/dr-flow-join-params1.png" /></a></p>
+</li>
+<li>
+<p>Select <code>Data assets</code> on the left panel and this time select the <code>incident_sla.csv</code> data asset. Then click the <code>Apply</code> button.</p>
+<p><a href="../../images/dr/dr-flow-join-select-second-asset.png"><img alt="Join second file" src="../../images/dr/dr-flow-join-select-second-asset.png" /></a></p>
+</li>
+<li>
+<p>Finish setting the following values and then click the <code>Next</code> button:</p>
+<ul>
+<li>Under the <code>Source</code> <code>*Suffix</code> option, enter <code>_inc_ds</code>.</li>
+<li>Under the <code>Data set to join</code> <code>*Suffix</code> option, enter <code>_inc_sla_ds</code>.</li>
+<li>
+<p>Under the Join keys, click the input box and select <code>number</code> for <code>incident.csv</code> and <code>inc_number</code> for <code>incident_sla.csv</code>.</p>
+<p><a href="../../images/dr/dr-flow-join-params2.png"><img alt="Set Join keys" src="../../images/dr/dr-flow-join-params2.png" /></a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Although we could modify what columns will be in the joined dataset, we will leave the default and include them all. Click the <code>Apply</code> button.</p>
+<p><a href="../../images/dr/dr-flow-join-apply.png"><img alt="Apply first join" src="../../images/dr/dr-flow-join-apply.png" /></a></p>
+</li>
+<li>
+<p>Let's say we've decide that there are columns that we don't want to leave in our dataset ( maybe because they might not be useful features in our Machine Learning model, or because we don't want to make those data attributes accessible to others, or any other reason). We'll remove the <code>inc_calendar_duration</code> column. For each column to be removed:</p>
+<ul>
+<li>
+<p>Click the <code>Operation +</code> button, then select the <code>Remove</code> operation.</p>
+<p><a href="../../images/dr/dr-flow-remove-operation.png"><img alt="Remove Column" src="../../images/dr/dr-flow-remove-operation.png" /></a></p>
+</li>
+<li>
+<p>In the <code>Select column</code> drop down, choose one of the columns to remove (i.e <code>FirstName</code>). Click the <code>Next</code> button and then the <code>Apply</code> button.</p>
+<p><a href="../../images/dr/dr-flow-remove-select-column.png"><img alt="Remove Column selection" src="../../images/dr/dr-flow-remove-select-column.png" /></a></p>
+</li>
+<li>
+<p>The column will be removed. Repeat the above two steps to remove the remaining six columns.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Finally, we want to ensure there is no duplicates in our dataset. Click the <code>Operation</code> button once again and click the <code>Remove duplicates</code> operation.</p>
+<p><a href="../../images/dr/dr-flow-remove-duplicates.png"><img alt="Remove Duplicates" src="../../images/dr/dr-flow-remove-duplicates.png" /></a></p>
+</li>
+<li>
+<p>Select <code>number</code> as the column and click the <code>Next</code> button. Then click the <code>Apply</code> button in the subsequent panel.</p>
+<p><a href="../../images/dr/dr-flow-remove-duplicates-select.png"><img alt="Remove Duplicates Select Column" src="../../images/dr/dr-flow-remove-duplicates-select.png" /></a></p>
+</li>
+<li>
+<p>At this point, you have a data transformation flow with 11 steps. The flow keeps track of each of the steps and we can even undo (or redo) an action using the circular arrows. To see the steps in the data flow that you have performed, click the <code>Steps</code> button. The operations that you have performed on the data will be shown.</p>
+<p><a href="../../images/dr/dr-final-flow.png"><img alt="Flow" src="../../images/dr/dr-final-flow.png" /></a></p>
+</li>
+<li>
+<p>You can modify these steps and/or save for future use. Lets edit the flow name and output options. Click on the <code>Information</code> icon on the top right and then click the <code>Edit</code> button.</p>
+<p><a href="../../images/dr/dr-flow-edit-information.png"><img alt="Flow" src="../../images/dr/dr-flow-edit-information.png" /></a></p>
+</li>
+<li>
+<p>Click the pencil icon next to <code>Data Refinery Flow Name</code>, set the name to <code>incident_wrangling_cleaning_flow</code> and click the <code>Apply</code> button. Then click the <code>Edit Output pencil icon</code> and set the name to <code>incident_shaped.csv</code> (leave the rest of the CSV output defaults) and click the 'Check mark icon'. Finally, click the <code>Done</code> button</p>
+<p><a href="../../images/dr/df-flow-edit-information-inputoutput.png"><img alt="Flow" src="../../images/dr/df-flow-edit-information-inputoutput.png" /></a></p>
+</li>
+<li>
+<p>Click the <code>Save</code> icon to save the flow.</p>
+<p><a href="../../images/dr/dr-flow-save.png"><img alt="Flow Save" src="../../images/dr/dr-flow-save.png" /></a></p>
+</li>
+</ul>
+<h3 id="run-data-flow-job">Run Data Flow Job</h3>
+<p>Data Refinery allows you to run these data flow jobs on demand or at scheduled times. In this way, you can regularly refine new data as it is updated.</p>
+<ul>
+<li>
+<p>Click on the <code>Jobs</code> icon and then <code>Save and create a job</code> option from the menu.</p>
+<p><a href="../../images/dr/dr-job-save-and-create.png"><img alt="Click jobs icon" src="../../images/dr/dr-job-save-and-create.png" /></a></p>
+</li>
+<li>
+<p>Give the job a name and optional description. Click the <code>Next</code> button.</p>
+<p><a href="../../images/dr/dr-job-name.png"><img alt="Refinery job name" src="../../images/dr/dr-job-name.png" /></a></p>
+</li>
+<li>
+<p>Click <code>Next</code> on the next two screens, leaving the default selections. You will reach the <code>Review and create</code> screen. Note the output name, which is <code>incident_shaped</code>. Click the <code>Create and run</code> button.</p>
+<p><a href="../../images/dr/dr-job-create-and-run.png"><img alt="Refinery job name" src="../../images/dr/dr-job-create-and-run.png" /></a></p>
+</li>
+<li>
+<p>When the job is successfully created, you will receive a notification. Click on the <code>job details</code> link in the notification panel to see the job status.</p>
+<p><a href="../../images/dr/dr-job-notification-details.png"><img alt="Refinery job name" src="../../images/dr/dr-job-notification-details.png" /></a></p>
+</li>
+<li>
+<p>The job will be listed with a status of <code>Running</code> and then the status will change to <code>Completed</code>. Once its completed, click the <code>Edit configuration</code> button.</p>
+<p><a href="../../images/dr/dr-job-completed-edit.png"><img alt="Click Edit to schedule job" src="../../images/dr/dr-job-completed-edit.png" /></a></p>
+</li>
+<li>
+<p>Click the pencil icon next to <code>Schedule</code>.</p>
+<p><a href="../../images/dr/dr-job-schedule.png"><img alt="Choose job scheduled time" src="../../images/dr/dr-job-schedule.png" /></a></p>
+</li>
+<li>
+<p>Notice that you can toggle the <em>Schedule to run</em> switch and choose a date and time to run this transformation as a job. We will not run this as a job, so go ahead and click the <code>Cancel</code> link.</p>
+<p><a href="../../images/dr/dr-job-schedule-settings.png"><img alt="Choose job schedule configuration" src="../../images/dr/dr-job-schedule-settings.png" /></a></p>
+</li>
+</ul>
+<h2 id="profile-data">Profile Data</h2>
+<ul>
+<li>
+<p>Go back to the project by clicking the name of the project in the breadcrumbs in the top left area of the browser.</p>
+<p><a href="../../images/dr/dr-back-to-project.png"><img alt="Back to project" src="../../images/dr/dr-back-to-project.png" /></a></p>
+</li>
+<li>
+<p>Click the <code>Assets</code> tab and then scroll down to the <code>Data Refinery flows</code> section and click on the <code>incident_cleaning_flow</code> flow.</p>
+<p><a href="../../images/dr/dr-flow-asset.png"><img alt="Back to refinery flow" src="../../images/dr/dr-flow-asset.png" /></a></p>
+</li>
+<li>
+<p>Wait for the flow operations to be applied and then click on the <code>Profile</code> tab will bring up a view of several statistics and histograms for the attributes in your data.</p>
+<p><a href="../../images/dr/dr-profile.png"><img alt="Data Refinery Profile tab" src="../../images/dr/dr-profile.png" /></a></p>
+</li>
+<li>
+<p>You can get insight into the data from the views and statistics:</p>
+<ul>
+<li>The median age of the applicants is 36, with the bulk under 49.</li>
+<li>About as many people had credits_paid_to_date as prior_payments_delayed. Few had no_credits.</li>
+<li>Over three times more loan applicants have no checking than those with greater than 200 in checking.</li>
+</ul>
+</li>
+</ul>
+<h2 id="visualize-data">Visualize Data</h2>
+<p>Let's do some visual exploration of our data using charts and graphs. Note that this is an exploratory phase and we're looking for insights in out data. We can accomplish this in Data Refinery interactively without coding.</p>
+<ul>
+<li>
+<p>Choose the <code>Visualizations</code> tab to bring up the page where you can select columns that you want to visualize. Add <code>LoanAmount</code> as the first column and click <code>Add Column</code> to add another column. Next add <code>LoanDuration</code> and click <code>Visualize</code>. The system will pick a suggested plot for you based on your data and show more suggested plot types at the top.</p>
+<p><a href="../../images/dr/dr-vis-smartpick.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-smartpick.PNG" /></a></p>
+</li>
+<li>
+<p>Remember that we are most interested in knowing how these features impact a loan being at the risk. So, let's add the <code>Risk</code> as a color on top of our current scatter plot. That should help us visually see if there's something of interest here.</p>
+</li>
+<li>
+<p>From the left, click the <code>Color Map</code> section and select <code>Risk</code>. Also, to see the full data, drag the right side of the data selector at the bottom all the way to the right, in order to show all the data inside your plot.</p>
+<p><a href="../../images/dr/dr-vis-scatter-add-color.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-scatter-add-color.PNG" /></a></p>
+</li>
+<li>
+<p>We notice that there are more risk (purple in this chart) on this plot towards the top right, than there is on the bottom left. This is a good start as it shows that there is probably a relationship between the riskiness of a loan and its duration and amount. It appears that the higher the amount and duration, the riskier the loan. Interesting, let's dig in further in how the loan duration could play into the riskiness of a loan.</p>
+</li>
+<li>
+<p>Let's plot a histogram of the <code>LoanDuration</code> to see if we can notice anything. First, select <code>Histogram</code> from the <code>Chart Type</code>. Next on the left, select <code>Risk</code> in the Split By section, select the <code>Stacked</code> radio button, and uncheck the <code>Show kde curve</code>, as well as the <code>Show distribution curve</code> options. You should see a chart that looks like the following image (move the bin width down to 1 if necessary).</p>
+<p><a href="../../images/dr/dr-vis-histogram.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-histogram.PNG" /></a></p>
+</li>
+<li>
+<p>It looks like the longer the duration the larger the blue bar (risky loan count) become and the smaller the purple bars (non risky loan count) become. That indicate loans with longer duration are in general more likely to be risky. However, we need more information.</p>
+</li>
+<li>
+<p>We next explore if there is some insight in terms of the riskiness of a loan based on its duration when broken down by the loan purpose. To do so, let's create a Heat Map plot.</p>
+</li>
+<li>
+<p>At the top of the page, in the <code>Chart Type</code> section, open the arrows on the right, select <code>Heat Map</code> (accept the warning if prompted).</p>
+<p><a href="../../images/dr/dr-vis-select-heatmap.png"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-select-heatmap.png" /></a></p>
+</li>
+<li>
+<p>Next, select <code>Risk</code> in the column section and <code>LoanPurpose</code> for the Row section. Additionally, to see the effects of the loan duration, select <code>Mean</code> in the summary section, and select <code>LoanDuration</code> in the <code>Value</code> section.</p>
+<p><a href="../../images/dr/dr-vis-heatmap.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-heatmap.PNG" /></a></p>
+</li>
+<li>
+<p>You can now see that the least risky loans are those taken out for purchasing a new car and they are on average 10 years long. To the left of that cell we see that loans taken out for the same purpose that average around 15 years for term length seem to be more risky. So one could conclude the longer the loan term is, the more likely it will be risky. In contrast, we can see that both risky and non-risky loans for the <code>other</code> category seem to have the same average term length, so one could conclude that there's little, if any, relationship between loan length and its riskiness for the loans of type <code>other</code>.</p>
+</li>
+<li>
+<p>In general, for each row, the bigger the color difference between the right and left column, the more likely that loan duration plays a role for the riskiness of the loan category.</p>
+</li>
+<li>
+<p>Now let's look into customizing our plot. Under the <code>Actions</code> panel, notice that you can perform tasks such as <code>Start over</code>, <code>Download chart details</code>, <code>Download chart image</code>, or set <code>Global visualization preferences</code> (<em>Note: Hover over the icons to see the names</em>).</p>
+</li>
+<li>
+<p>Click on the <code>gear</code> icon in the <code>Actions</code> panel. We see that we can do things in the <code>Global visualization preferences</code> for <code>Titles</code>, <code>Tools</code>, <code>Theme</code>, and <code>Notifications</code>. Click on the <code>Theme</code> tab and update the color scheme to <code>Dark</code>. Then click the <code>Apply</code> button, now the colors for all of our charts will reflect this. Play around with various Themes and find one that you like.</p>
+<p><a href="../../images/dr/dr-vis-choose-theme.png"><img alt="Visualize set theme and choose preferences" src="../../images/dr/dr-vis-choose-theme.png" /></a></p>
+</li>
+<li>
+<p>Finally, to save our plot as an image, click on the image icon on the top right, highlighted below, and then save the image.</p>
+<p><a href="../../images/dr/dr-vis-save.png"><img alt="Visualize set theme and choose preferences" src="../../images/dr/dr-vis-save.png" /></a></p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>We've seen a some of the capabilities of the Data Refinery. We saw how we can transform data using R code, as well as using various operations on the columns such as changing the data type, removing empty rows, or deleting the column altogether. We next saw that all the steps in our Data Flow are recorded, so we can remove steps, repeat them, or edit an individual step. We were able to quickly profile the data, to see histograms and statistics for each column. And finally we created more in-depth Visualizations, creating a scatter plot, histogram, and heatmap to explore the relationship between the riskiness of a loan and its duration, and purpose.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../servicenow-dataset/" class="md-footer__link md-footer__link--prev" aria-label="Previous: About the data set" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              About the data set
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../autoai/" class="md-footer__link md-footer__link--next" aria-label="Next: Model building with AutoAI" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Model building with AutoAI
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>

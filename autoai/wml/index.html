@@ -1,0 +1,923 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.mskcc.org/pages/aiml/ml101/autoai/wml/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Deploying and consuming models - ML101 Training</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#machine-learning-model-online-deployment-and-scoring" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ML101 Training" class="md-header__button md-logo" aria-label="ML101 Training" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ML101 Training
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deploying and consuming models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.mskcc.org/aiml/ml101/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ml101
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Welcome
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../servicenow-dataset/" class="md-tabs__link md-tabs__link--active">
+        Training
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../resources/" class="md-tabs__link">
+        Training Resources
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ML101 Training" class="md-nav__button md-logo" aria-label="ML101 Training" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    ML101 Training
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.mskcc.org/aiml/ml101/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ml101
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Welcome
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Welcome" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Welcome
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        About the training
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Training
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Training" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Training
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        Predict incident resolution time with AutoAI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predict incident resolution time with AutoAI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Predict incident resolution time with AutoAI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servicenow-dataset/" class="md-nav__link">
+        About the data set
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-refinery/" class="md-nav__link">
+        Data processing with Data Refinery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoai/" class="md-nav__link">
+        Model building with AutoAI
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Deploying and consuming models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Deploying and consuming models
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-online-model-deployment" class="md-nav__link">
+    Create Online Model Deployment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-online-model-deployment" class="md-nav__link">
+    Test Online Model Deployment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-test-online-model-deployment-using-curl" class="md-nav__link">
+    (Optional) Test Online Model Deployment using cURL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup-deployments" class="md-nav__link">
+    Cleanup Deployments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-nav__link">
+        Unstructured Data Analysis on RStudio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/custom-model-deployment/" class="md-nav__link">
+        Predict incident resolution time with Watson Studio Jupyter notebooks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Training Resources
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Training Resources" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Training Resources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-online-model-deployment" class="md-nav__link">
+    Create Online Model Deployment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-online-model-deployment" class="md-nav__link">
+    Test Online Model Deployment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-test-online-model-deployment-using-curl" class="md-nav__link">
+    (Optional) Test Online Model Deployment using cURL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup-deployments" class="md-nav__link">
+    Cleanup Deployments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.mskcc.org/aiml/ml101/edit/master/docs/autoai/wml.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="machine-learning-model-online-deployment-and-scoring">Machine Learning Model Online Deployment and Scoring</h1>
+<p>In this module, we will learn how to deploy our Machine Learning models. By doing so, we make them available for use in production such that applications and business processes can derive insights from them. There are several types of deployments available (<a href="https://www.ibm.com/support/producthub/icpdata/docs/content/SSQNUZ_current/wsj/analyze-data/pm_service_supported_frameworks.html">depending on the model framework used</a>). In this lab, we will explore:</p>
+<ul>
+<li>Online Deployments - Allows you to run the model on data in real-time, as data is received by a web service.</li>
+</ul>
+<p>This lab will build an online deployment and test the model endpoint using both the built in testing tool as well as external testing tools.</p>
+<blockquote>
+<p><strong>Note:</strong> You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.</p>
+<p><strong>Note:</strong> The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space. If you would have any issues, check the <a href="../faq/README.md">FAQ section</a>.</p>
+</blockquote>
+<h2 id="create-online-model-deployment">Create Online Model Deployment</h2>
+<p>After a model has been created, saved and promoted to our deployment space, we can proceed to deploying the model. For this section, we will be creating an online deployment. This type of deployment will make an instance of the model available to make predictions in real time via an API. Although we will use the Cloud Pak for Data UI to deploy the model, the same can be done programmatically.</p>
+<ul>
+<li>
+<p>Navigate to the left-hand (☰) hamburger menu, expand the <code>Deployments</code> section and click on <code>View all spaces</code>.</p>
+<p><a href="../../images/navigation/menu-analytics-deployments.png"><img alt="Analytics Analyze deployments" src="../../images/navigation/menu-analytics-deployments.png" /></a></p>
+</li>
+<li>
+<p>Click on the <code>Spaces</code> tab and then choose the deployment space you setup previously by clicking on the name of your space.</p>
+</li>
+<li>
+<p>From your deployment space overview, click the <code>Assets</code> tab and in the 'Models' table, find the model name for the model you previously built and now want to create a deployment against. Use your mouse to hover over the right side of that table row and click the <code>Deploy</code> rocket icon (the icons are not visible by default until you hover over them).</p>
+<blockquote>
+<p>Note: There may be more than one model listed in them 'Models' section. This can happen if you have run the Jupyter notebook that creates SparkML models more than once or if you have run through both the Jupyter notebook and AutoAI modules to create models.</p>
+</blockquote>
+<p><a href="../../images/deployment/deploy-autoai-model-icon.png"><img alt="Actions Deploy model" src="../../images/deployment/deploy-autoai-model-icon.png" /></a></p>
+</li>
+<li>
+<p>On the <code>Create a deployment</code> screen, choose <code>Online</code> for the <code>Deployment Type</code>, give the Deployment a name and optionally a description and click the <code>Create</code> button.</p>
+<p><a href="../../images/deployment/deploy-online-deployment.png"><img alt="Online Deployment Create" src="../../images/deployment/deploy-online-deployment.png" /></a></p>
+</li>
+<li>
+<p>Click on the <code>Deployments</code> tab. The new deployment status will show as <code>In progress</code> and then switch to <code>Deployed</code> when it is complete.</p>
+<p><a href="../../images/deployment/deploy-status-deployed.png"><img alt="Status Deployed" src="../../images/deployment/deploy-status-deployed.png" /></a></p>
+</li>
+</ul>
+<h2 id="test-online-model-deployment">Test Online Model Deployment</h2>
+<p>Cloud Pak for Data offers tools to quickly test out Watson Machine Learning models. We begin with the built-in tooling.</p>
+<ul>
+<li>
+<p>From the Model deployment page, once the deployment status shows as <code>Deployed</code>, click on the name of your deployment. The deployment <code>API reference</code> tab shows how to use the model using <code>cURL</code>, <code>Java</code>, <code>Javascript</code>, <code>Python</code>, and <code>Scala</code>.</p>
+</li>
+<li>
+<p>To get to the built-in test tool, click on the <code>Test</code> tab and then click on the <code>Provide input data as JSON</code> icon.</p>
+<p><a href="../../images/deployment/deploy-model-test-page.png"><img alt="Test deployment with JSON" src="../../images/deployment/deploy-model-test-page.png" /></a></p>
+</li>
+<li>
+<p>Copy and paste the following data objects into the <code>Body</code> panel (replace the text that was in the input panel).</p>
+<blockquote>
+<p><em>Note: Click the tab appropriate for the model you are testing (either an AutoAI model or the SparkML one built using the Jupyter notebook). Also make sure the input below is the only content in the field. Do not append it to the default content <code>{ "input_data": [.......] }</code> that may already be in the test input panel.</em></p>
+</blockquote>
+<p>=== "AutoAI Model"</p>
+<pre><code>```json
+{
+    "input_data": [
+        {
+            "fields": [
+                "CustomerID",
+                "LoanDuration",
+                "LoanPurpose",
+                "LoanAmount",
+                "InstallmentPercent",
+                "OthersOnLoan",
+                "EmploymentDuration",
+                "Sex",
+                "CurrentResidenceDuration",
+                "OwnsProperty",
+                "Age",
+                "Housing",
+                "Job",
+                "Dependents",
+                "Telephone",
+                "ForeignWorker",
+                "CheckingStatus",
+                "CreditHistory",
+                "ExistingSavings",
+                "InstallmentPlans",
+                "ExistingCreditsCount"
+            ],
+            "values": [
+                [
+                    "1",
+                    13,
+                    "car_new",
+                    1343,
+                    2,
+                    "none",
+                    "1_to_4",
+                    "female",
+                    3,
+                    "savings_insurance",
+                    46,
+                    "own",
+                    "skilled",
+                    1,
+                    "none",
+                    "yes",
+                    "no_checking",
+                    "credits_paid_to_date",
+                    "100_to_500",
+                    "none",
+                    2
+                ]
+            ]
+        }
+    ]
+}
+```
+</code></pre>
+<p>=== "Jupyter Spark Model"</p>
+<pre><code>```json
+{ "input_data": [{
+    "fields": [ "CheckingStatus", "LoanDuration", "CreditHistory", "LoanPurpose", "LoanAmount", "ExistingSavings", "EmploymentDuration", "InstallmentPercent", "Sex", "OthersOnLoan", "CurrentResidenceDuration", "OwnsProperty", "Age", "InstallmentPlans", "Housing", "ExistingCreditsCount", "Job", "Dependents", "Telephone", "ForeignWorker"],
+    "values": [[ "no_checking", 13, "credits_paid_to_date", "car_new", 1343, "100_to_500", "1_to_4", 2, "female", "none", 3, "savings_insurance", 46, "none", "own", 2, "skilled", 1, "none", "yes"]]
+}]}
+```
+</code></pre>
+</li>
+<li>
+<p>Click the <em><code>Predict</code></em> button. The model will be called with the input data and the results will display in the <em>Result</em> window. Scroll down to the bottom of the result to see the prediction (i.e "Risk" or "No Risk").</p>
+<p><a href="../../images/deployment/deploy-test-model-prediction.png"><img alt="Testing the deployed model" src="../../images/deployment/deploy-test-model-prediction.png" /></a></p>
+<blockquote>
+<p><strong>Note:</strong> For some deployed models (for example AutoAI based models), you can provide the request payload using a generated form by clicking on the <code>Provide input using form</code> icon and providing values for the input fields of the form. If the form is not available for the model you deployed, the icon will not be present or will remain grayed out.</p>
+<p><a href="../../images/deployment/deploy-test-input-form.png"><img alt="Input to the fields" src="../../images/deployment/deploy-test-input-form.png" /></a></p>
+</blockquote>
+</li>
+<li>
+<p><strong><em>Important: If you have completed this section and do not plan on completing the other optional deployment approaches below, please go ahead and cleanup your deployment. Follow the <a href="#cleanup-deployments">Cleanup Deployment instructions below.</a></em></strong></p>
+</li>
+</ul>
+<h2 id="optional-test-online-model-deployment-using-curl">(Optional) Test Online Model Deployment using cURL</h2>
+<p>Now that the model is deployed, we can also test it from external applications. One way to invoke the model API is using the cURL command. For simplicity, we will be using the IBM Cloud shell to run these cURL commands. If you have the IBM Cloud CLI and associated command line utilities installed locally, you are free to attempt these steps on your own machine.</p>
+<ul>
+<li>
+<p>In a new browser window/tab, go to the <a href="https://cloud.ibm.com">IBM Cloud Home Page</a> and click the terminal icon in the upper right-hand bar. The cloud shell will launch a new browser tab with a web terminal.</p>
+<p><a href="../../images/setup/access-cloud-shell.png"><img alt="Terminal Button" src="../../images/setup/access-cloud-shell.png" /></a></p>
+</li>
+<li>
+<p>In order to invoke the model endpoints, we need to authorize using an access token. To get an access token you will use the <code>IBM Cloud API Key</code>, which you created during the setup section.</p>
+</li>
+<li>
+<p>In the cloud shell window, run the following command to get a token to access the API. Replace <code>&lt;API Key&gt;</code> with the api key that you got from running above command.</p>
+<p><code>bash
+curl -X POST 'https://iam.cloud.ibm.com/identity/token' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: application/json' --data-urlencode 'grant_type=urn:ibm:params:oauth:grant-type:apikey' --data-urlencode 'apikey=&lt;API Key&gt;'</code></p>
+</li>
+<li>
+<p>A json string will be returned with a value for <code>accessToken</code> that will look <em>similar</em> to this:</p>
+<p><code>json
+{
+    "access_token":"AAAAAAAfakeACCESSTOKENNNNNNN",
+    "refresh_token":"BBBBBBBBBBBFAKEREFRESHTOKENNNNNNNNNNNNN",
+    "token_type":"Bearer",
+    "expires_in":3600,
+    "expiration":1601317201,
+    "scope":"ibm openid"
+}</code></p>
+</li>
+<li>
+<p>You will save the access token value shown after the <code>access_token</code> key in a temporary environment variable in your terminal. Copy the access token value (without the quotes) in the terminal and then use the following export command to save the "accessToken" to a variable called <code>WML_AUTH_TOKEN</code>.</p>
+<p><code>bash
+export WML_AUTH_TOKEN=&lt;value-of-access-token&gt;</code></p>
+</li>
+<li>
+<p>Back on the Cloud Pak for Data model deployment page, go to the <code>API reference</code> tab and copy the <code>Endpoint</code> value (an example endpoint would be: <em><code>"https://us-south.ml.cloud.ibm.com/ml/v4/deployments/&lt;DEPLOYMENT_ID&gt;/predictions?version=2020-09-01"</code></em>).</p>
+<p><a href="../../images/deployment/deploy-model-endpoint.png"><img alt="Model Deployment Endpoint" src="../../images/deployment/deploy-model-endpoint.png" /></a></p>
+</li>
+<li>
+<p>In your cloud shell terminal, save that endpoint to a variable named <code>URL</code> by exporting the value. (<em>Note: the URL should end with a version query parameter</em>).</p>
+<p><code>bash
+export WML_URL=&lt;value-of-endpoint&gt;</code></p>
+</li>
+<li>
+<p>Now run this curl command from the terminal to invoke the model with the same payload we used previousy:</p>
+<p><code>bash
+curl -k -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer  $WML_AUTH_TOKEN" -d '{"input_data": [{"fields": ["CustomerID","LoanDuration","LoanPurpose","LoanAmount","InstallmentPercent","OthersOnLoan","EmploymentDuration","Sex","CurrentResidenceDuration","OwnsProperty","Age","Housing","Job","Dependents","Telephone","ForeignWorker","CheckingStatus","CreditHistory","ExistingSavings","InstallmentPlans","ExistingCreditsCount"],"values": [["1",13,"car_new",1343,2,"none","1_to_4","female",3,"savings_insurance",46,"own","skilled",1,"none","yes","no_checking","credits_paid_to_date","100_to_500","none",2]]}]}' $WML_URL</code></p>
+</li>
+<li>
+<p>A json string will be returned with the response, including a  prediction from the model (i.e a "Risk" or "No Risk" at the end indicating the prediction of this loan representing risk).</p>
+</li>
+<li>
+<p><strong><em>Important: If you have completed this section and do not plan on completing the other optional deployment approaches below, please go ahead and cleanup your deployment. Follow the <a href="#cleanup-deployments">Cleanup Deployment instructions below.</a></em></strong></p>
+</li>
+</ul>
+<h2 id="cleanup-deployments">Cleanup Deployments</h2>
+<p>You can clean up the deployments created for your models. To remove the deployment:</p>
+<ul>
+<li>
+<p>Navigate to the left-hand (☰) hamburger menu, expand the <code>Deployments</code> section and click on <code>View all spaces</code>.</p>
+<p><a href="../../images/navigation/menu-analytics-deployments.png"><img alt="Analytics Analyze deployments" src="../../images/navigation/menu-analytics-deployments.png" /></a></p>
+</li>
+<li>
+<p>Choose the deployment space you setup previously by clicking on the name of your space.</p>
+</li>
+<li>
+<p>From your deployment space overview, click the <code>Assets</code> tab and in the 'Model' table, click on the model name that you previousely promoted and created deployments against.</p>
+</li>
+<li>
+<p>Under 'Deployment Types', click on <code>Online</code> to view the online deployments you have created for this model.</p>
+</li>
+<li>
+<p>In the table on the main panel, click on the three vertical dots at the right of the row for the online deployment you created. Select the <code>Delete</code> option from the menu.</p>
+<blockquote>
+<p><em>Note: The vertical dots are hidden until you hover over them with your mouse</em></p>
+</blockquote>
+<p><a href="../../images/deployment/delete-deployment.png"><img alt="Delete online deployments" src="../../images/deployment/delete-deployment.png" /></a></p>
+</li>
+<li>
+<p>In the subsequent pop up window, click on the <code>Delete</code> button to confirm you want to delete this deployment.</p>
+</li>
+<li>
+<p>You can follow the same process to delete other deployments as needed.</p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Congratulations. You've completed this lab and seen how to create and test online deployments for your machine learning models.</p>
+<p>Feel free to explore the additional (optional) deployment labs, which show you how to:</p>
+<ul>
+<li><a href="batch-model-deployment.md">Create and test a batch deployments.</a></li>
+<li><a href="sample-application-integration.md">Integrate the online deployment to an application.</a></li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../autoai/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Model building with AutoAI" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Model building with AutoAI
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-footer__link md-footer__link--next" aria-label="Next: Unstructured Data Analysis on RStudio" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Unstructured Data Analysis on RStudio
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>
