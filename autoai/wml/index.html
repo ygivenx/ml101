@@ -191,7 +191,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../servicenow-dataset/" class="md-tabs__link md-tabs__link--active">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
         Training
       </a>
     </li>
@@ -355,8 +355,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../servicenow-dataset/" class="md-nav__link">
-        About the data set
+      <a href="../" class="md-nav__link">
+        Introduction
       </a>
     </li>
   
@@ -438,13 +438,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#optional-test-online-model-deployment-using-curl" class="md-nav__link">
-    (Optional) Test Online Model Deployment using cURL
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#cleanup-deployments" class="md-nav__link">
     Cleanup Deployments
   </a>
@@ -476,9 +469,30 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
         Unstructured Data Analysis on RStudio
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Unstructured Data Analysis on RStudio" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Unstructured Data Analysis on RStudio
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rstudio/" class="md-nav__link">
+        Introduction
       </a>
     </li>
   
@@ -489,9 +503,66 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jupyter/custom-model-deployment/" class="md-nav__link">
-        Predict incident resolution time with Watson Studio Jupyter notebooks
+      <a href="../../rstudio/topic-modeling/" class="md-nav__link">
+        Running RStudio
       </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        Breast Cancer Image Classification with Watson Studio Jupyter notebooks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Breast Cancer Image Classification with Watson Studio Jupyter notebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Image Classification with Watson Studio Jupyter notebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/image-classification/" class="md-nav__link">
+        Running Jupyter notebooks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -584,13 +655,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#optional-test-online-model-deployment-using-curl" class="md-nav__link">
-    (Optional) Test Online Model Deployment using cURL
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#cleanup-deployments" class="md-nav__link">
     Cleanup Deployments
   </a>
@@ -629,23 +693,19 @@
 <p>This lab will build an online deployment and test the model endpoint using both the built in testing tool as well as external testing tools.</p>
 <blockquote>
 <p><strong>Note:</strong> You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.</p>
-<p><strong>Note:</strong> The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space. If you would have any issues, check the <a href="../faq/README.md">FAQ section</a>.</p>
 </blockquote>
 <h2 id="create-online-model-deployment">Create Online Model Deployment</h2>
 <p>After a model has been created, saved and promoted to our deployment space, we can proceed to deploying the model. For this section, we will be creating an online deployment. This type of deployment will make an instance of the model available to make predictions in real time via an API. Although we will use the Cloud Pak for Data UI to deploy the model, the same can be done programmatically.</p>
 <ul>
 <li>
-<p>Navigate to the left-hand (☰) hamburger menu, expand the <code>Deployments</code> section and click on <code>View all spaces</code>.</p>
+<p>Navigate to the left-hand (☰) hamburger menu, click on the <code>Deployments</code> section.</p>
 <p><a href="../../images/navigation/menu-analytics-deployments.png"><img alt="Analytics Analyze deployments" src="../../images/navigation/menu-analytics-deployments.png" /></a></p>
 </li>
 <li>
 <p>Click on the <code>Spaces</code> tab and then choose the deployment space you setup previously by clicking on the name of your space.</p>
 </li>
 <li>
-<p>From your deployment space overview, click the <code>Assets</code> tab and in the 'Models' table, find the model name for the model you previously built and now want to create a deployment against. Use your mouse to hover over the right side of that table row and click the <code>Deploy</code> rocket icon (the icons are not visible by default until you hover over them).</p>
-<blockquote>
-<p>Note: There may be more than one model listed in them 'Models' section. This can happen if you have run the Jupyter notebook that creates SparkML models more than once or if you have run through both the Jupyter notebook and AutoAI modules to create models.</p>
-</blockquote>
+<p>From your deployment space overview, click the <code>Assets</code> tab and in the <code>Models</code> table, find the model name for the model you previously built and now want to create a deployment against. Use your mouse to hover over the right side of that table row and click the <code>Deploy</code> rocket icon (the icons are not visible by default until you hover over them).</p>
 <p><a href="../../images/deployment/deploy-autoai-model-icon.png"><img alt="Actions Deploy model" src="../../images/deployment/deploy-autoai-model-icon.png" /></a></p>
 </li>
 <li>
@@ -669,136 +729,58 @@
 </li>
 <li>
 <p>Copy and paste the following data objects into the <code>Body</code> panel (replace the text that was in the input panel).</p>
-<blockquote>
-<p><em>Note: Click the tab appropriate for the model you are testing (either an AutoAI model or the SparkML one built using the Jupyter notebook). Also make sure the input below is the only content in the field. Do not append it to the default content <code>{ "input_data": [.......] }</code> that may already be in the test input panel.</em></p>
-</blockquote>
-<p>=== "AutoAI Model"</p>
-<pre><code>```json
-{
-    "input_data": [
+</li>
+</ul>
+<pre><code class="language-json">{
+    &quot;input_data&quot;: [
         {
-            "fields": [
-                "CustomerID",
-                "LoanDuration",
-                "LoanPurpose",
-                "LoanAmount",
-                "InstallmentPercent",
-                "OthersOnLoan",
-                "EmploymentDuration",
-                "Sex",
-                "CurrentResidenceDuration",
-                "OwnsProperty",
-                "Age",
-                "Housing",
-                "Job",
-                "Dependents",
-                "Telephone",
-                "ForeignWorker",
-                "CheckingStatus",
-                "CreditHistory",
-                "ExistingSavings",
-                "InstallmentPlans",
-                "ExistingCreditsCount"
+            &quot;fields&quot;: [
+                &quot;number&quot;,
+                &quot;location&quot;,
+                &quot;u_floor&quot;,
+                &quot;u_room&quot;,
+                &quot;category&quot;,
+                &quot;subcategory&quot;,
+                &quot;business_service&quot;,
+                &quot;priority&quot;,
+                &quot;assignment_group&quot;,
+                &quot;taskslatable_sla&quot;,
+                &quot;taskslatable_stage&quot;,
+                &quot;inc_calendar_duration&quot;,
+                &quot;taskslatable_schedule&quot;,
+                &quot;taskslatable_start_time&quot;,
+                &quot;taskslatable_end_time&quot;
             ],
-            "values": [
+            &quot;values&quot;: [
                 [
-                    "1",
-                    13,
-                    "car_new",
-                    1343,
-                    2,
-                    "none",
-                    "1_to_4",
-                    "female",
-                    3,
-                    "savings_insurance",
-                    46,
-                    "own",
-                    "skilled",
-                    1,
-                    "none",
-                    "yes",
-                    "no_checking",
-                    "credits_paid_to_date",
-                    "100_to_500",
-                    "none",
-                    2
+                    &quot;&quot;,
+                    &quot;530 East 74th (Koch)&quot;,
+                    &quot;16th Floor&quot;,
+                    &quot;16-260&quot;,
+                    &quot;Hardware&quot;,
+                    &quot;Printer&quot;,
+                    &quot;&quot;,
+                    &quot;5 - Planning&quot;,
+                    &quot;&quot;,
+                    &quot;&quot;,
+                    &quot;&quot;,
+                    &quot;8-5 weekdays excluding holidays&quot;,
+                    &quot;&quot;,
+                    &quot;&quot;
                 ]
             ]
         }
     ]
 }
-```
 </code></pre>
-<p>=== "Jupyter Spark Model"</p>
-<pre><code>```json
-{ "input_data": [{
-    "fields": [ "CheckingStatus", "LoanDuration", "CreditHistory", "LoanPurpose", "LoanAmount", "ExistingSavings", "EmploymentDuration", "InstallmentPercent", "Sex", "OthersOnLoan", "CurrentResidenceDuration", "OwnsProperty", "Age", "InstallmentPlans", "Housing", "ExistingCreditsCount", "Job", "Dependents", "Telephone", "ForeignWorker"],
-    "values": [[ "no_checking", 13, "credits_paid_to_date", "car_new", 1343, "100_to_500", "1_to_4", 2, "female", "none", 3, "savings_insurance", 46, "none", "own", 2, "skilled", 1, "none", "yes"]]
-}]}
-```
-</code></pre>
-</li>
+<ul>
 <li>
-<p>Click the <em><code>Predict</code></em> button. The model will be called with the input data and the results will display in the <em>Result</em> window. Scroll down to the bottom of the result to see the prediction (i.e "Risk" or "No Risk").</p>
+<p>Click the <em><code>Predict</code></em> button. The model will be called with the input data and the results will display in the <em>Result</em> window. Scroll down to the bottom of the result to see the prediction.</p>
 <p><a href="../../images/deployment/deploy-test-model-prediction.png"><img alt="Testing the deployed model" src="../../images/deployment/deploy-test-model-prediction.png" /></a></p>
 <blockquote>
 <p><strong>Note:</strong> For some deployed models (for example AutoAI based models), you can provide the request payload using a generated form by clicking on the <code>Provide input using form</code> icon and providing values for the input fields of the form. If the form is not available for the model you deployed, the icon will not be present or will remain grayed out.</p>
 <p><a href="../../images/deployment/deploy-test-input-form.png"><img alt="Input to the fields" src="../../images/deployment/deploy-test-input-form.png" /></a></p>
 </blockquote>
-</li>
-<li>
-<p><strong><em>Important: If you have completed this section and do not plan on completing the other optional deployment approaches below, please go ahead and cleanup your deployment. Follow the <a href="#cleanup-deployments">Cleanup Deployment instructions below.</a></em></strong></p>
-</li>
-</ul>
-<h2 id="optional-test-online-model-deployment-using-curl">(Optional) Test Online Model Deployment using cURL</h2>
-<p>Now that the model is deployed, we can also test it from external applications. One way to invoke the model API is using the cURL command. For simplicity, we will be using the IBM Cloud shell to run these cURL commands. If you have the IBM Cloud CLI and associated command line utilities installed locally, you are free to attempt these steps on your own machine.</p>
-<ul>
-<li>
-<p>In a new browser window/tab, go to the <a href="https://cloud.ibm.com">IBM Cloud Home Page</a> and click the terminal icon in the upper right-hand bar. The cloud shell will launch a new browser tab with a web terminal.</p>
-<p><a href="../../images/setup/access-cloud-shell.png"><img alt="Terminal Button" src="../../images/setup/access-cloud-shell.png" /></a></p>
-</li>
-<li>
-<p>In order to invoke the model endpoints, we need to authorize using an access token. To get an access token you will use the <code>IBM Cloud API Key</code>, which you created during the setup section.</p>
-</li>
-<li>
-<p>In the cloud shell window, run the following command to get a token to access the API. Replace <code>&lt;API Key&gt;</code> with the api key that you got from running above command.</p>
-<p><code>bash
-curl -X POST 'https://iam.cloud.ibm.com/identity/token' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: application/json' --data-urlencode 'grant_type=urn:ibm:params:oauth:grant-type:apikey' --data-urlencode 'apikey=&lt;API Key&gt;'</code></p>
-</li>
-<li>
-<p>A json string will be returned with a value for <code>accessToken</code> that will look <em>similar</em> to this:</p>
-<p><code>json
-{
-    "access_token":"AAAAAAAfakeACCESSTOKENNNNNNN",
-    "refresh_token":"BBBBBBBBBBBFAKEREFRESHTOKENNNNNNNNNNNNN",
-    "token_type":"Bearer",
-    "expires_in":3600,
-    "expiration":1601317201,
-    "scope":"ibm openid"
-}</code></p>
-</li>
-<li>
-<p>You will save the access token value shown after the <code>access_token</code> key in a temporary environment variable in your terminal. Copy the access token value (without the quotes) in the terminal and then use the following export command to save the "accessToken" to a variable called <code>WML_AUTH_TOKEN</code>.</p>
-<p><code>bash
-export WML_AUTH_TOKEN=&lt;value-of-access-token&gt;</code></p>
-</li>
-<li>
-<p>Back on the Cloud Pak for Data model deployment page, go to the <code>API reference</code> tab and copy the <code>Endpoint</code> value (an example endpoint would be: <em><code>"https://us-south.ml.cloud.ibm.com/ml/v4/deployments/&lt;DEPLOYMENT_ID&gt;/predictions?version=2020-09-01"</code></em>).</p>
-<p><a href="../../images/deployment/deploy-model-endpoint.png"><img alt="Model Deployment Endpoint" src="../../images/deployment/deploy-model-endpoint.png" /></a></p>
-</li>
-<li>
-<p>In your cloud shell terminal, save that endpoint to a variable named <code>URL</code> by exporting the value. (<em>Note: the URL should end with a version query parameter</em>).</p>
-<p><code>bash
-export WML_URL=&lt;value-of-endpoint&gt;</code></p>
-</li>
-<li>
-<p>Now run this curl command from the terminal to invoke the model with the same payload we used previousy:</p>
-<p><code>bash
-curl -k -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer  $WML_AUTH_TOKEN" -d '{"input_data": [{"fields": ["CustomerID","LoanDuration","LoanPurpose","LoanAmount","InstallmentPercent","OthersOnLoan","EmploymentDuration","Sex","CurrentResidenceDuration","OwnsProperty","Age","Housing","Job","Dependents","Telephone","ForeignWorker","CheckingStatus","CreditHistory","ExistingSavings","InstallmentPlans","ExistingCreditsCount"],"values": [["1",13,"car_new",1343,2,"none","1_to_4","female",3,"savings_insurance",46,"own","skilled",1,"none","yes","no_checking","credits_paid_to_date","100_to_500","none",2]]}]}' $WML_URL</code></p>
-</li>
-<li>
-<p>A json string will be returned with the response, including a  prediction from the model (i.e a "Risk" or "No Risk" at the end indicating the prediction of this loan representing risk).</p>
 </li>
 <li>
 <p><strong><em>Important: If you have completed this section and do not plan on completing the other optional deployment approaches below, please go ahead and cleanup your deployment. Follow the <a href="#cleanup-deployments">Cleanup Deployment instructions below.</a></em></strong></p>
@@ -836,11 +818,6 @@ curl -k -X POST --header 'Content-Type: application/json' --header 'Accept: appl
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <p>Congratulations. You've completed this lab and seen how to create and test online deployments for your machine learning models.</p>
-<p>Feel free to explore the additional (optional) deployment labs, which show you how to:</p>
-<ul>
-<li><a href="batch-model-deployment.md">Create and test a batch deployments.</a></li>
-<li><a href="sample-application-integration.md">Integrate the online deployment to an application.</a></li>
-</ul>
                 
               
               
@@ -876,13 +853,13 @@ curl -k -X POST --header 'Content-Type: application/json' --header 'Accept: appl
       
       
         
-        <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-footer__link md-footer__link--next" aria-label="Next: Unstructured Data Analysis on RStudio" rel="next">
+        <a href="../../rstudio/" class="md-footer__link md-footer__link--next" aria-label="Next: Introduction" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Unstructured Data Analysis on RStudio
+              Introduction
             </div>
           </div>
           <div class="md-footer__button md-icon">

@@ -191,7 +191,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../servicenow-dataset/" class="md-tabs__link md-tabs__link--active">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
         Training
       </a>
     </li>
@@ -355,8 +355,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../servicenow-dataset/" class="md-nav__link">
-        About the data set
+      <a href="../" class="md-nav__link">
+        Introduction
       </a>
     </li>
   
@@ -482,9 +482,30 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
         Unstructured Data Analysis on RStudio
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Unstructured Data Analysis on RStudio" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Unstructured Data Analysis on RStudio
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rstudio/" class="md-nav__link">
+        Introduction
       </a>
     </li>
   
@@ -495,9 +516,66 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jupyter/custom-model-deployment/" class="md-nav__link">
-        Predict incident resolution time with Watson Studio Jupyter notebooks
+      <a href="../../rstudio/topic-modeling/" class="md-nav__link">
+        Running RStudio
       </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        Breast Cancer Image Classification with Watson Studio Jupyter notebooks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Breast Cancer Image Classification with Watson Studio Jupyter notebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Image Classification with Watson Studio Jupyter notebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/image-classification/" class="md-nav__link">
+        Running Jupyter notebooks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -643,13 +721,12 @@
 </ol>
 <blockquote>
 <p><strong>Note:</strong> You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.</p>
-<p><strong>Note:</strong> The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space.</p>
 </blockquote>
 <h2 id="merge-and-cleanse-data">Merge and Cleanse Data</h2>
 <p>We will start by wrangling, shaping and refining our data. To do this, we will create a refinery flow to contain a series of data transformation steps.</p>
 <ul>
 <li>
-<p>Go the (☰) navigation menu, expand <code>Projects</code> and click on the project you created during the setup section.</p>
+<p>Go the (☰) navigation menu, expand <code>Projects</code> and click on the <code>AutoAIIncidentResolution</code> project pre-created for this section.</p>
 <p><a href="../../images/navigation/menu-projects.png"><img alt="(☰) Menu -&gt; your project" src="../../images/navigation/menu-projects.png" /></a></p>
 </li>
 <li>
@@ -661,7 +738,7 @@
 <p><a href="../../images/dr/dr-flow-add-asset.png"><img alt="Add Asset to DR Flow" src="../../images/dr/dr-flow-add-asset.png" /></a></p>
 </li>
 <li>
-<p>The first thing we want to do is create a merged dataset. Start by joining the incident data with information about the incident SLA. Click the <code>Operation</code> button on the top left and then scroll down and select the <code>Join</code> operation.</p>
+<p>The first thing we want to do is create a merged dataset. Start by joining the incident data with information about incident SLA. Click the <code>Operation +</code> button on the top left and then scroll down and select the <code>Join</code> operation.</p>
 <p><a href="../../images/dr/dr-flow-join-operation.png"><img alt="Join operation" src="../../images/dr/dr-flow-join-operation.png" /></a></p>
 </li>
 <li>
@@ -688,31 +765,28 @@
 <p><a href="../../images/dr/dr-flow-join-apply.png"><img alt="Apply first join" src="../../images/dr/dr-flow-join-apply.png" /></a></p>
 </li>
 <li>
-<p>Let's say we've decide that there are columns that we don't want to leave in our dataset ( maybe because they might not be useful features in our Machine Learning model, or because we don't want to make those data attributes accessible to others, or any other reason). We'll remove the <code>inc_calendar_duration</code> column. For each column to be removed:</p>
+<p>Now we want to filter the rows that will be used for training the model. Click on the <code>Operation +</code> button and select <code>Filter</code> operation.</p>
+<p><a href="../../images/dr/dr-flow-filter-operation.png"><img alt="Filter operation" src="../../images/dr/dr-flow-filter-operation.png" /></a></p>
+</li>
+<li>
+<p>Use the condition <code>CONDITION 1</code> and</p>
 <ul>
-<li>
-<p>Click the <code>Operation +</code> button, then select the <code>Remove</code> operation.</p>
-<p><a href="../../images/dr/dr-flow-remove-operation.png"><img alt="Remove Column" src="../../images/dr/dr-flow-remove-operation.png" /></a></p>
-</li>
-<li>
-<p>In the <code>Select column</code> drop down, choose one of the columns to remove (i.e <code>FirstName</code>). Click the <code>Next</code> button and then the <code>Apply</code> button.</p>
-<p><a href="../../images/dr/dr-flow-remove-select-column.png"><img alt="Remove Column selection" src="../../images/dr/dr-flow-remove-select-column.png" /></a></p>
-</li>
-<li>
-<p>The column will be removed. Repeat the above two steps to remove the remaining six columns.</p>
-</li>
+<li>Under <code>Column</code> select <code>taskslatable_sla</code> and for <code>Operator</code> select <code>Contains</code>. Leaving the <code>Text</code> checkbox selected, type <strong>Resolve</strong>.</li>
+<li>Then add a second condition by clicking on <code>Add condition +</code> and leave <code>AND</code> selected. This time, under <code>Column</code> select <code>taskslatable_stage</code> and in <code>Operator</code> select <code>Is equal to</code> and type <strong>Completed</strong> on the <code>Value</code> text input field.</li>
+<li>Go ahead and click <code>Apply</code>.</li>
 </ul>
+<p><a href="../../images/dr/dr-flow-filter-params.png"><img alt="Filter conditions" src="../../images/dr/dr-flow-filter-params.png" /></a></p>
 </li>
 <li>
-<p>Finally, we want to ensure there is no duplicates in our dataset. Click the <code>Operation</code> button once again and click the <code>Remove duplicates</code> operation.</p>
-<p><a href="../../images/dr/dr-flow-remove-duplicates.png"><img alt="Remove Duplicates" src="../../images/dr/dr-flow-remove-duplicates.png" /></a></p>
+<p>Finally, for visualization purposes, let's convert the <code>inc_business_duration</code> column from <code>String</code> to <code>Integer</code>. Again, click on <code>Operation +</code> button and select <code>Convert column type</code>.</p>
+<p><a href="../../images/dr/dr-flow-convert-operation.png"><img alt="Convert type operation" src="../../images/dr/dr-flow-convert-operation.png" /></a></p>
 </li>
 <li>
-<p>Select <code>number</code> as the column and click the <code>Next</code> button. Then click the <code>Apply</code> button in the subsequent panel.</p>
-<p><a href="../../images/dr/dr-flow-remove-duplicates-select.png"><img alt="Remove Duplicates Select Column" src="../../images/dr/dr-flow-remove-duplicates-select.png" /></a></p>
+<p>Click on <code>Select column +</code> and under <code>Column</code> select <code>inc_business_duration</code>. On <code>Type</code> select <code>Integer</code> and <code>Apply</code>.</p>
+<p><a href="../../images/dr/dr-flow-convert-params.png"><img alt="Convert type operation" src="../../images/dr/dr-flow-convert-params.png" /></a></p>
 </li>
 <li>
-<p>At this point, you have a data transformation flow with 11 steps. The flow keeps track of each of the steps and we can even undo (or redo) an action using the circular arrows. To see the steps in the data flow that you have performed, click the <code>Steps</code> button. The operations that you have performed on the data will be shown.</p>
+<p>At this point, you have a data transformation flow with 3 steps. The flow keeps track of each of the steps and we can even undo (or redo) an action using the circular arrows. To see the steps in the data flow that you have performed, click the <code>Steps</code> button. The operations that you have performed on the data will be shown.</p>
 <p><a href="../../images/dr/dr-final-flow.png"><img alt="Flow" src="../../images/dr/dr-final-flow.png" /></a></p>
 </li>
 <li>
@@ -720,7 +794,7 @@
 <p><a href="../../images/dr/dr-flow-edit-information.png"><img alt="Flow" src="../../images/dr/dr-flow-edit-information.png" /></a></p>
 </li>
 <li>
-<p>Click the pencil icon next to <code>Data Refinery Flow Name</code>, set the name to <code>incident_wrangling_cleaning_flow</code> and click the <code>Apply</code> button. Then click the <code>Edit Output pencil icon</code> and set the name to <code>incident_shaped.csv</code> (leave the rest of the CSV output defaults) and click the 'Check mark icon'. Finally, click the <code>Done</code> button</p>
+<p>Click the pencil icon next to <code>Data Refinery Flow Name</code>, set the name to <code>incident_cleaning_flow</code> and click the <code>Apply</code> button. Then click the <code>Edit Output pencil icon</code> and set the name to <code>incident_shaped.csv</code> (leave the rest of the CSV output defaults) and click the 'Check mark icon'. Finally, click the <code>Done</code> button</p>
 <p><a href="../../images/dr/df-flow-edit-information-inputoutput.png"><img alt="Flow" src="../../images/dr/df-flow-edit-information-inputoutput.png" /></a></p>
 </li>
 <li>
@@ -740,7 +814,7 @@
 <p><a href="../../images/dr/dr-job-name.png"><img alt="Refinery job name" src="../../images/dr/dr-job-name.png" /></a></p>
 </li>
 <li>
-<p>Click <code>Next</code> on the next two screens, leaving the default selections. You will reach the <code>Review and create</code> screen. Note the output name, which is <code>incident_shaped</code>. Click the <code>Create and run</code> button.</p>
+<p>Click <code>Next</code> on the next two screens, leaving the default selections. You will reach the <code>Review and create</code> screen. Note the output name, which is <code>incident_shaped.csv</code>. Click the <code>Create and run</code> button.</p>
 <p><a href="../../images/dr/dr-job-create-and-run.png"><img alt="Refinery job name" src="../../images/dr/dr-job-create-and-run.png" /></a></p>
 </li>
 <li>
@@ -748,26 +822,18 @@
 <p><a href="../../images/dr/dr-job-notification-details.png"><img alt="Refinery job name" src="../../images/dr/dr-job-notification-details.png" /></a></p>
 </li>
 <li>
-<p>The job will be listed with a status of <code>Running</code> and then the status will change to <code>Completed</code>. Once its completed, click the <code>Edit configuration</code> button.</p>
-<p><a href="../../images/dr/dr-job-completed-edit.png"><img alt="Click Edit to schedule job" src="../../images/dr/dr-job-completed-edit.png" /></a></p>
+<p>The job will be listed with a status of <code>Running</code> and then the status will change to <code>Completed</code>. Once its completed, click the project name <code>AutoAIIncidentResolution</code>.</p>
+<p><a href="../../images/dr/dr-job-completed-edit.png"><img alt="Click back to project on job completed" src="../../images/dr/dr-job-completed-edit.png" /></a></p>
 </li>
 <li>
-<p>Click the pencil icon next to <code>Schedule</code>.</p>
-<p><a href="../../images/dr/dr-job-schedule.png"><img alt="Choose job scheduled time" src="../../images/dr/dr-job-schedule.png" /></a></p>
-</li>
-<li>
-<p>Notice that you can toggle the <em>Schedule to run</em> switch and choose a date and time to run this transformation as a job. We will not run this as a job, so go ahead and click the <code>Cancel</code> link.</p>
-<p><a href="../../images/dr/dr-job-schedule-settings.png"><img alt="Choose job schedule configuration" src="../../images/dr/dr-job-schedule-settings.png" /></a></p>
+<p>Click on the <code>Assets</code> and you will find a new CSV file <code>incident_shaped.csv</code> in your <code>Data assets</code></p>
+<p><a href="../../images/dr/dr-job-completed-output.png"><img alt="Click Edit to schedule job" src="../../images/dr/dr-job-completed-output.png" /></a></p>
 </li>
 </ul>
 <h2 id="profile-data">Profile Data</h2>
 <ul>
 <li>
-<p>Go back to the project by clicking the name of the project in the breadcrumbs in the top left area of the browser.</p>
-<p><a href="../../images/dr/dr-back-to-project.png"><img alt="Back to project" src="../../images/dr/dr-back-to-project.png" /></a></p>
-</li>
-<li>
-<p>Click the <code>Assets</code> tab and then scroll down to the <code>Data Refinery flows</code> section and click on the <code>incident_cleaning_flow</code> flow.</p>
+<p>Scroll down to the <code>Data Refinery flows</code> section and click on the <code>incident_cleaning_flow</code> flow.</p>
 <p><a href="../../images/dr/dr-flow-asset.png"><img alt="Back to refinery flow" src="../../images/dr/dr-flow-asset.png" /></a></p>
 </li>
 <li>
@@ -777,67 +843,23 @@
 <li>
 <p>You can get insight into the data from the views and statistics:</p>
 <ul>
-<li>The median age of the applicants is 36, with the bulk under 49.</li>
-<li>About as many people had credits_paid_to_date as prior_payments_delayed. Few had no_credits.</li>
-<li>Over three times more loan applicants have no checking than those with greater than 200 in checking.</li>
+<li>The median incident business duration is 289 seconds.</li>
+<li>TODO: add more insights</li>
 </ul>
 </li>
 </ul>
 <h2 id="visualize-data">Visualize Data</h2>
 <p>Let's do some visual exploration of our data using charts and graphs. Note that this is an exploratory phase and we're looking for insights in out data. We can accomplish this in Data Refinery interactively without coding.</p>
 <ul>
-<li>
-<p>Choose the <code>Visualizations</code> tab to bring up the page where you can select columns that you want to visualize. Add <code>LoanAmount</code> as the first column and click <code>Add Column</code> to add another column. Next add <code>LoanDuration</code> and click <code>Visualize</code>. The system will pick a suggested plot for you based on your data and show more suggested plot types at the top.</p>
-<p><a href="../../images/dr/dr-vis-smartpick.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-smartpick.PNG" /></a></p>
-</li>
-<li>
-<p>Remember that we are most interested in knowing how these features impact a loan being at the risk. So, let's add the <code>Risk</code> as a color on top of our current scatter plot. That should help us visually see if there's something of interest here.</p>
-</li>
-<li>
-<p>From the left, click the <code>Color Map</code> section and select <code>Risk</code>. Also, to see the full data, drag the right side of the data selector at the bottom all the way to the right, in order to show all the data inside your plot.</p>
-<p><a href="../../images/dr/dr-vis-scatter-add-color.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-scatter-add-color.PNG" /></a></p>
-</li>
-<li>
-<p>We notice that there are more risk (purple in this chart) on this plot towards the top right, than there is on the bottom left. This is a good start as it shows that there is probably a relationship between the riskiness of a loan and its duration and amount. It appears that the higher the amount and duration, the riskier the loan. Interesting, let's dig in further in how the loan duration could play into the riskiness of a loan.</p>
-</li>
-<li>
-<p>Let's plot a histogram of the <code>LoanDuration</code> to see if we can notice anything. First, select <code>Histogram</code> from the <code>Chart Type</code>. Next on the left, select <code>Risk</code> in the Split By section, select the <code>Stacked</code> radio button, and uncheck the <code>Show kde curve</code>, as well as the <code>Show distribution curve</code> options. You should see a chart that looks like the following image (move the bin width down to 1 if necessary).</p>
-<p><a href="../../images/dr/dr-vis-histogram.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-histogram.PNG" /></a></p>
-</li>
-<li>
-<p>It looks like the longer the duration the larger the blue bar (risky loan count) become and the smaller the purple bars (non risky loan count) become. That indicate loans with longer duration are in general more likely to be risky. However, we need more information.</p>
-</li>
-<li>
-<p>We next explore if there is some insight in terms of the riskiness of a loan based on its duration when broken down by the loan purpose. To do so, let's create a Heat Map plot.</p>
-</li>
-<li>
-<p>At the top of the page, in the <code>Chart Type</code> section, open the arrows on the right, select <code>Heat Map</code> (accept the warning if prompted).</p>
-<p><a href="../../images/dr/dr-vis-select-heatmap.png"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-select-heatmap.png" /></a></p>
-</li>
-<li>
-<p>Next, select <code>Risk</code> in the column section and <code>LoanPurpose</code> for the Row section. Additionally, to see the effects of the loan duration, select <code>Mean</code> in the summary section, and select <code>LoanDuration</code> in the <code>Value</code> section.</p>
-<p><a href="../../images/dr/dr-vis-heatmap.PNG"><img alt="DR Smart Visualization" src="../../images/dr/dr-vis-heatmap.PNG" /></a></p>
-</li>
-<li>
-<p>You can now see that the least risky loans are those taken out for purchasing a new car and they are on average 10 years long. To the left of that cell we see that loans taken out for the same purpose that average around 15 years for term length seem to be more risky. So one could conclude the longer the loan term is, the more likely it will be risky. In contrast, we can see that both risky and non-risky loans for the <code>other</code> category seem to have the same average term length, so one could conclude that there's little, if any, relationship between loan length and its riskiness for the loans of type <code>other</code>.</p>
-</li>
-<li>
-<p>In general, for each row, the bigger the color difference between the right and left column, the more likely that loan duration plays a role for the riskiness of the loan category.</p>
-</li>
-<li>
-<p>Now let's look into customizing our plot. Under the <code>Actions</code> panel, notice that you can perform tasks such as <code>Start over</code>, <code>Download chart details</code>, <code>Download chart image</code>, or set <code>Global visualization preferences</code> (<em>Note: Hover over the icons to see the names</em>).</p>
-</li>
-<li>
-<p>Click on the <code>gear</code> icon in the <code>Actions</code> panel. We see that we can do things in the <code>Global visualization preferences</code> for <code>Titles</code>, <code>Tools</code>, <code>Theme</code>, and <code>Notifications</code>. Click on the <code>Theme</code> tab and update the color scheme to <code>Dark</code>. Then click the <code>Apply</code> button, now the colors for all of our charts will reflect this. Play around with various Themes and find one that you like.</p>
-<p><a href="../../images/dr/dr-vis-choose-theme.png"><img alt="Visualize set theme and choose preferences" src="../../images/dr/dr-vis-choose-theme.png" /></a></p>
-</li>
-<li>
-<p>Finally, to save our plot as an image, click on the image icon on the top right, highlighted below, and then save the image.</p>
-<p><a href="../../images/dr/dr-vis-save.png"><img alt="Visualize set theme and choose preferences" src="../../images/dr/dr-vis-save.png" /></a></p>
-</li>
+<li>Scatter <code>category</code>/<code>subcategory</code></li>
 </ul>
+<p><a href="../../images/dr/dr-vis-scatter.png"><img alt="Scatter plot" src="../../images/dr/dr-vis-scatter.png" /></a></p>
+<ul>
+<li>Histogram <code>assignment_group</code></li>
+</ul>
+<p><a href="../images/dr/dr-vis-histogram.png"><img alt="Histogram" src="../images/dr/dr-vis-histogram.png" /></a></p>
 <h2 id="conclusion">Conclusion</h2>
-<p>We've seen a some of the capabilities of the Data Refinery. We saw how we can transform data using R code, as well as using various operations on the columns such as changing the data type, removing empty rows, or deleting the column altogether. We next saw that all the steps in our Data Flow are recorded, so we can remove steps, repeat them, or edit an individual step. We were able to quickly profile the data, to see histograms and statistics for each column. And finally we created more in-depth Visualizations, creating a scatter plot, histogram, and heatmap to explore the relationship between the riskiness of a loan and its duration, and purpose.</p>
+<p>We've seen a some of the capabilities of the Data Refinery. We saw how we can transform data, as well as using various operations on the columns such as changing the data type and filtering. We next saw that all the steps in our Data Flow are recorded, so we can remove steps, repeat them, or edit an individual step. We were able to quickly profile the data, to see histograms and statistics for each column. And finally we created more in-depth Visualizations, creating a scatter plot and histogram to explore the relationship between the incident duration and its category, subcategory and assignment group.</p>
                 
               
               
@@ -857,7 +879,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../servicenow-dataset/" class="md-footer__link md-footer__link--prev" aria-label="Previous: About the data set" rel="prev">
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -866,7 +888,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              About the data set
+              Introduction
             </div>
           </div>
         </a>

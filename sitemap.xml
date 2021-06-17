@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://github.mskcc.org/pages/aiml/ml101/autoai/</loc>
+         <lastmod>2021-06-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://github.mskcc.org/pages/aiml/ml101/autoai/autoai/</loc>
          <lastmod>2021-06-17</lastmod>
          <changefreq>daily</changefreq>
@@ -21,22 +26,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.mskcc.org/pages/aiml/ml101/autoai/servicenow-dataset/</loc>
-         <lastmod>2021-06-17</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://github.mskcc.org/pages/aiml/ml101/autoai/wml/</loc>
          <lastmod>2021-06-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.mskcc.org/pages/aiml/ml101/jupyter/custom-model-deployment/</loc>
+         <loc>https://github.mskcc.org/pages/aiml/ml101/jupyter/</loc>
          <lastmod>2021-06-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.mskcc.org/pages/aiml/ml101/rstudio/unstructured-data-analysis-on-rstudio/</loc>
+         <loc>https://github.mskcc.org/pages/aiml/ml101/jupyter/image-classification/</loc>
+         <lastmod>2021-06-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.mskcc.org/pages/aiml/ml101/rstudio/</loc>
+         <lastmod>2021-06-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.mskcc.org/pages/aiml/ml101/rstudio/topic-modeling/</loc>
          <lastmod>2021-06-17</lastmod>
          <changefreq>daily</changefreq>
     </url>

@@ -191,7 +191,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../servicenow-dataset/" class="md-tabs__link md-tabs__link--active">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
         Training
       </a>
     </li>
@@ -355,8 +355,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../servicenow-dataset/" class="md-nav__link">
-        About the data set
+      <a href="../" class="md-nav__link">
+        Introduction
       </a>
     </li>
   
@@ -426,13 +426,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#save-autoai-notebooks" class="md-nav__link">
-    Save AutoAI notebooks
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#conclusion" class="md-nav__link">
     Conclusion
   </a>
@@ -469,9 +462,30 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../rstudio/unstructured-data-analysis-on-rstudio/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
         Unstructured Data Analysis on RStudio
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Unstructured Data Analysis on RStudio" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Unstructured Data Analysis on RStudio
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rstudio/" class="md-nav__link">
+        Introduction
       </a>
     </li>
   
@@ -482,9 +496,66 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jupyter/custom-model-deployment/" class="md-nav__link">
-        Predict incident resolution time with Watson Studio Jupyter notebooks
+      <a href="../../rstudio/topic-modeling/" class="md-nav__link">
+        Running RStudio
       </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        Breast Cancer Image Classification with Watson Studio Jupyter notebooks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Breast Cancer Image Classification with Watson Studio Jupyter notebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Image Classification with Watson Studio Jupyter notebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jupyter/image-classification/" class="md-nav__link">
+        Running Jupyter notebooks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -577,13 +648,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#save-autoai-notebooks" class="md-nav__link">
-    Save AutoAI notebooks
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#conclusion" class="md-nav__link">
     Conclusion
   </a>
@@ -618,7 +682,6 @@
 </ol>
 <blockquote>
 <p><strong>Note:</strong> You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.</p>
-<p><strong>Note:</strong> The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space.</p>
 </blockquote>
 <h2 id="create-an-autoai-experiment">Create an AutoAI Experiment</h2>
 <ul>
@@ -638,12 +701,8 @@
 <p>To configure the experiment, we must first give it the dataset that will be used to train the machine learning model. Click on the <code>Select from project</code> button to point to a dataset in your project.</p>
 </li>
 <li>
-<p>Now we can select the training CSV file. If you completed the previous <strong><em>Data Processing with Data Refinery</em></strong> lab module where you generated a single shaped CSV file from a refinery job, select that CSV file (the name will be whatever you selected in that module, for example: <code>incident_shaped</code>).</p>
+<p>Now we can select the training CSV file. If you completed the previous <strong><em>Data Processing with Data Refinery</em></strong> lab module where you generated a single shaped CSV file from a refinery job, select that CSV file (the name will be whatever you selected in that module, for example: <code>incident_shaped.csv</code>).</p>
 <p><a href="../../images/autoai/autoai-select-dataset.png"><img alt="Select data" src="../../images/autoai/autoai-select-dataset.png" /></a></p>
-</li>
-<li>
-<p>If you are presented with a prompt to create a time series forecast, click the <code>No</code> button.</p>
-<p><a href="../../images/autoai/autoai-no-forecast.png"><img alt="No forecast" src="../../images/autoai/autoai-no-forecast.png" /></a></p>
 </li>
 <li>
 <p>Now, we will need to indicate what we want the model to predict. Under <code>What do you want to predict?</code> panel, select the <code>Prediction column</code> as <code>inc_business_duration</code>.</p>
@@ -653,8 +712,10 @@
 <p><a href="../../images/autoai/autoai-choose-prediction-and-configure.png"><img alt="Choose Churn column and run" src="../../images/autoai/autoai-choose-prediction-and-configure.png" /></a></p>
 </li>
 <li>
-<p>Click on the <code>Data source</code> tab and scroll down to the <code>Select features to include</code> section. Deselect the checkbox for the <code>number</code> column name. This will remove the incident number column from being used as a feature for the model. Although we could change other aspects of the experiment, we will accept the remaining default values and click the <code>Save settings</code> button. (<em>Feel free to explore the other possible settings before clicking the save button</em>).</p>
-<p><a href="../../images/autoai/autoai-exp-settings-columns.png"><img alt="Choose features and save" src="../../images/autoai/autoai-exp-settings-columns.png" /></a></p>
+<p>Click on the <code>Data source</code> tab. For the sake of time, in the <code>Subsample</code> section turn on <code>Subsample rows</code> switch and set the <code>Amount</code> to 10 percent. Scroll down to the <code>Select features to include</code> section. Deselect the checkbox for the <code>number</code>, <code>taskslatable_sla</code>, <code>taskslatable_stage</code>, <code>inc_calendar_duration</code>, <code>taskslatable_start_time</code> and <code>taskslatable_end_time</code> column names. This will remove these fields from being used as a feature for the model. Although we could change other aspects of the experiment, we will accept the remaining default values and click the <code>Save settings</code> button. (<em>Feel free to explore the other possible settings before clicking the save button</em>).</p>
+<p><a href="../../images/autoai/autoai-exp-settings-sample.png"><img alt="Choose features and save" src="../../images/autoai/autoai-exp-settings-sample.png" /></a></p>
+<p><a href="../../images/autoai/autoai-exp-settings-columns-1.png"><img alt="Choose features and save" src="../../images/autoai/autoai-exp-settings-columns-1.png" /></a></p>
+<p><a href="../../images/autoai/autoai-exp-settings-columns-2.png"><img alt="Choose features and save" src="../../images/autoai/autoai-exp-settings-columns-2.png" /></a></p>
 </li>
 <li>
 <p>To start the experiment, click on the <code>Run experiment</code> button.</p>
@@ -680,22 +741,22 @@
 <h2 id="save-and-promote-autoai-model">Save and Promote AutoAI Model</h2>
 <ul>
 <li>
-<p>Once the experiment completes, you can explore the various pipelines and options in the UI. Some of the options available are to see a comparison of the pipelines, to change the ranking based on a different performance metric, to see a log of the experiment, or to see the ranked listing of the pipelines (ranking based on the optimization metric in your experiment, in this case, accuracy).</p>
+<p>Once the experiment completes, you can explore the various pipelines and options in the UI. Some of the options available are to see a comparison of the pipelines, to change the ranking based on a different performance metric, to see a log of the experiment, or to see the ranked listing of the pipelines (ranking based on the optimization metric in your experiment, in this case, RMSE).</p>
 <p><a href="../../images/autoai/autoai-pipelines-complete.png"><img alt="autoai pipelines created" src="../../images/autoai/autoai-pipelines-complete.png" /></a></p>
 </li>
 <li>
 <p>Scroll down to see the <code>Pipeline leaderboard</code>. The top performing pipeline is in the first rank.</p>
 </li>
 <li>
-<p>The next step is to select the model that gives the best result and view its performance. In this case, Pipeline 3 gave the best result for our experiment. You can view the detailed results by clicking the corresponding pipeline name from the leaderboard:</p>
+<p>The next step is to select the model that gives the best result and view its performance. In this case, Pipeline 4 gave the best result for our experiment. You can view the detailed results by clicking the corresponding pipeline name from the leaderboard:</p>
 <p><a href="../../images/autoai/autoai-pipeline-leaderboard-topranked.png"><img alt="pipeline leaderboard" src="../../images/autoai/autoai-pipeline-leaderboard-topranked.png" /></a></p>
 </li>
 <li>
-<p>The model evaluation page will show metrics for the experiment, confusion matrix, feature transformations that were performed (if any), which features contribute to the model, and more details of the pipeline. Optionally, feel free to click through these views of the pipeline details.</p>
+<p>The model evaluation page will show metrics for the experiment, feature transformations that were performed (if any), which features contribute to the model, and more details of the pipeline. Optionally, feel free to click through these views of the pipeline details. For instance, you could select <code>Pipeline 2</code> (before the feature engineering step) and review the <code>Feature Importance</code> tab. You will notice that <code>assignment_group</code> is the on the top of this list</p>
 <p><a href="../../images/autoai/autoai-toppipeline-details.png"><img alt="Model evaluation" src="../../images/autoai/autoai-toppipeline-details.png" /></a></p>
 </li>
 <li>
-<p>In order to deploy this model, click on the <em><code>Save as</code></em> button. On the next scren, select the <code>Model</code> option. Keep the default name, add an optional description and tags, and click the <code>Create</code> button to save the model.</p>
+<p>In order to deploy this model, select <code>Pipeline 4</code>,  click on the <em><code>Save as</code></em> button. On the next scren, select the <code>Model</code> option. Keep the default name, add an optional description and tags, and click the <code>Create</code> button to save the model.</p>
 <p><img alt="Save model" src="../../images/autoai/autoai-pipeline-save-model.png" /></p>
 </li>
 <li>
@@ -711,37 +772,7 @@
 <p><a href="../../images/autoai/autoai-promote-to-space-confirm.png"><img alt="Promote model" src="../../images/autoai/autoai-promote-to-space-confirm.png" /></a></p>
 </li>
 <li>
-<p>You will be brought back to your project assets page and see a notification that the model was promoted to the deployment space succesfully. Feel free to close that notification.</p>
-</li>
-</ul>
-<h2 id="save-autoai-notebooks">Save AutoAI notebooks</h2>
-<p>In addition to saving models, we now have the ability to save a Jupyter notebook with working code. This can be the code representation of the AutoAI experiment (with access to all of the generated pipelines), or it can be the implementation of a specific pipeline. Let's explore how we can save both the experiment and a pipeline as a notebook.</p>
-<ul>
-<li>
-<p>To save the AutoAI experiment as a notebook, navigate back to the AutoAI experiment overview page by clicking on the AutoAI experiment name in your project assets page (under the <code>AutoAI experiments</code> section).</p>
-</li>
-<li>
-<p>Click on the <code>Save code</code> link in the 'Progress map' section of the UI.</p>
-<p><a href="../../images/autoai/autoai-experiment-save-code.png"><img alt="Save notebook" src="../../images/autoai/autoai-experiment-save-code.png" /></a></p>
-</li>
-<li>
-<p>Leave the default name and click the <code>Create</code> button to save the experiment as a notebook.</p>
-<p><a href="../../images/autoai/autoai-experiment-save-code-create.png"><img alt="Save notebook" src="../../images/autoai/autoai-experiment-save-code-create.png" /></a></p>
-</li>
-<li>
-<p>To save the AutoAI pipeline as a notebook, from the experiment overview page, scroll down to the pipeline leader board section. Then hover over the right side of one of the other pipelines and click the resulting <code>Save as</code> button. For sake of demonstration, we are going to save a pipeline for an algorithm that is different from the model we saved in the previous section (i.e in this case Pipeline 7).</p>
-<p><a href="../../images/autoai/autoai-pipeline-for-notebook.png"><img alt="Save notebook" src="../../images/autoai/autoai-pipeline-for-notebook.png" /></a></p>
-</li>
-<li>
-<p>Choose the <code>Notebook</code> tile, accept the default name, add an optional description, and click the <code>Create</code> button.</p>
-<p><a href="../../images/autoai/autoai-save-as-notebook.png"><img alt="Name and create notebook" src="../../images/autoai/autoai-save-as-notebook.png" /></a></p>
-</li>
-<li>
-<p>You will receive a notification to indicate that your notebook is saved to your project. Close the notification and then click on your project name in the project path at the top of the screen.</p>
-<p><a href="../../images/autoai/autoai-navigate-to-project.png"><img alt="Navigate to Project" src="../../images/autoai/autoai-navigate-to-project.png" /></a></p>
-</li>
-<li>
-<p>The notebook will be saved to your project, and can be examined in detail, changed and modified, and used to create a new model. See the instructions in the <a href="./running-autoai-notebook.md">Modifying and running an AutoAI generated notebook</a> lab for details.</p>
+<p>You will be brought back to your project assets page and see a notification that the model was promoted to the deployment space successfully. Feel free to close that notification.</p>
 </li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
