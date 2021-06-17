@@ -13,12 +13,16 @@ nav:
     - About the training: README.md
   - Training:
     - Predict incident resolution time with AutoAI:      
-      - About the data set: autoai/servicenow-dataset.md
+      - Introduction: autoai/README.md
       - Data processing with Data Refinery: autoai/data-refinery.md
       - Model building with AutoAI: autoai/autoai.md
       - Deploying and consuming models: autoai/wml.md
-    - Unstructured Data Analysis on RStudio: rstudio/unstructured-data-analysis-on-rstudio.md
-    - Predict incident resolution time with Watson Studio Jupyter notebooks: jupyter/custom-model-deployment.md
+    - Unstructured Data Analysis on RStudio:
+      - Introduction: rstudio/README.md
+      - Running RStudio: rstudio/topic-modeling.md
+    - Breast Cancer Image Classification with Watson Studio Jupyter notebooks:
+      - Introduction: jupyter/custom-model-deployment.md
+      - Running Jupyter notebooks: jupyter/custom-model-deployment.md
   - Training Resources:
     - Resources: resources.md
 
