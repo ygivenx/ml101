@@ -1,4 +1,4 @@
-# Brest Cancer Tumor Classification
+# Breast Cancer Tumor Classification
 
 The objective of this module it to predict the likelihood for a patient getting diagnosed with a malignant form of breast cancer using the attributes of the dataset.
 
