@@ -11,8 +11,6 @@ This section is broken up into the following steps:
 
 > **Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous page.
 
-> **Note:** The lab instructions below assume you have completed the setup section already, if not, be sure to complete the setup first to create a project and a deployment space.
-
 ## Create an AutoAI Experiment
 
 * Go the (☰) navigation menu, expand `Projects` and click on the project you created during the setup section.
@@ -29,13 +27,9 @@ This section is broken up into the following steps:
 
 * To configure the experiment, we must first give it the dataset that will be used to train the machine learning model. Click on the `Select from project` button to point to a dataset in your project.
 
-* Now we can select the training CSV file. If you completed the previous ***Data Processing with Data Refinery*** lab module where you generated a single shaped CSV file from a refinery job, select that CSV file (the name will be whatever you selected in that module, for example: `incident_shaped`).
+* Now we can select the training CSV file. If you completed the previous ***Data Processing with Data Refinery*** lab module where you generated a single shaped CSV file from a refinery job, select that CSV file (the name will be whatever you selected in that module, for example: `incident_shaped.csv`).
 
     [![Select data](../images/autoai/autoai-select-dataset.png)](../images/autoai/autoai-select-dataset.png)
-
-* If you are presented with a prompt to create a time series forecast, click the `No` button.
-
-    [![No forecast](../images/autoai/autoai-no-forecast.png)](../images/autoai/autoai-no-forecast.png)
 
 * Now, we will need to indicate what we want the model to predict. Under `What do you want to predict?` panel, select the `Prediction column` as `inc_business_duration`.
 
@@ -43,9 +37,14 @@ This section is broken up into the following steps:
 
     [![Choose Churn column and run](../images/autoai/autoai-choose-prediction-and-configure.png)](../images/autoai/autoai-choose-prediction-and-configure.png)
 
-* Click on the `Data source` tab and scroll down to the `Select features to include` section. Deselect the checkbox for the `number` column name. This will remove the incident number column from being used as a feature for the model. Although we could change other aspects of the experiment, we will accept the remaining default values and click the `Save settings` button. (*Feel free to explore the other possible settings before clicking the save button*).
+* Click on the `Data source` tab. For the sake of time, in the `Subsample` section turn on `Subsample rows` switch and set the `Amount` to 10 percent. Scroll down to the `Select features to include` section. Deselect the checkbox for the `number`, `taskslatable_sla`, `taskslatable_stage`, `inc_calendar_duration`, `taskslatable_start_time` and `taskslatable_end_time` column names. This will remove these fields from being used as a feature for the model. Although we could change other aspects of the experiment, we will accept the remaining default values and click the `Save settings` button. (*Feel free to explore the other possible settings before clicking the save button*).
 
-    [![Choose features and save](../images/autoai/autoai-exp-settings-columns.png)](../images/autoai/autoai-exp-settings-columns.png)
+    [![Choose features and save](../images/autoai/autoai-exp-settings-sample.png)](../images/autoai/autoai-exp-settings-sample.png)
+
+    [![Choose features and save](../images/autoai/autoai-exp-settings-columns-1.png)](../images/autoai/autoai-exp-settings-columns-1.png)
+
+    [![Choose features and save](../images/autoai/autoai-exp-settings-columns-2.png)](../images/autoai/autoai-exp-settings-columns-2.png)
+
 
 * To start the experiment, click on the `Run experiment` button.
 
@@ -66,21 +65,21 @@ This section is broken up into the following steps:
 
 ## Save and Promote AutoAI Model
 
-* Once the experiment completes, you can explore the various pipelines and options in the UI. Some of the options available are to see a comparison of the pipelines, to change the ranking based on a different performance metric, to see a log of the experiment, or to see the ranked listing of the pipelines (ranking based on the optimization metric in your experiment, in this case, accuracy).
+* Once the experiment completes, you can explore the various pipelines and options in the UI. Some of the options available are to see a comparison of the pipelines, to change the ranking based on a different performance metric, to see a log of the experiment, or to see the ranked listing of the pipelines (ranking based on the optimization metric in your experiment, in this case, RMSE).
 
     [![autoai pipelines created](../images/autoai/autoai-pipelines-complete.png)](../images/autoai/autoai-pipelines-complete.png)
 
 * Scroll down to see the `Pipeline leaderboard`. The top performing pipeline is in the first rank.
 
-* The next step is to select the model that gives the best result and view its performance. In this case, Pipeline 3 gave the best result for our experiment. You can view the detailed results by clicking the corresponding pipeline name from the leaderboard:
+* The next step is to select the model that gives the best result and view its performance. In this case, Pipeline 4 gave the best result for our experiment. You can view the detailed results by clicking the corresponding pipeline name from the leaderboard:
 
     [![pipeline leaderboard](../images/autoai/autoai-pipeline-leaderboard-topranked.png)](../images/autoai/autoai-pipeline-leaderboard-topranked.png)
 
-* The model evaluation page will show metrics for the experiment, confusion matrix, feature transformations that were performed (if any), which features contribute to the model, and more details of the pipeline. Optionally, feel free to click through these views of the pipeline details.
+* The model evaluation page will show metrics for the experiment, feature transformations that were performed (if any), which features contribute to the model, and more details of the pipeline. Optionally, feel free to click through these views of the pipeline details. For instance, you could select `Pipeline 2` (before the feature engineering step) and review the `Feature Importance` tab. You will notice that `assignment_group` is the on the top of this list
 
     [![Model evaluation](../images/autoai/autoai-toppipeline-details.png)](../images/autoai/autoai-toppipeline-details.png)
 
-* In order to deploy this model, click on the *`Save as`* button. On the next scren, select the `Model` option. Keep the default name, add an optional description and tags, and click the `Create` button to save the model.
+* In order to deploy this model, select `Pipeline 4`,  click on the *`Save as`* button. On the next scren, select the `Model` option. Keep the default name, add an optional description and tags, and click the `Create` button to save the model.
 
     ![Save model](../images/autoai/autoai-pipeline-save-model.png)
 
@@ -96,35 +95,8 @@ This section is broken up into the following steps:
 
     [![Promote model](../images/autoai/autoai-promote-to-space-confirm.png)](../images/autoai/autoai-promote-to-space-confirm.png)
 
-* You will be brought back to your project assets page and see a notification that the model was promoted to the deployment space succesfully. Feel free to close that notification.
+* You will be brought back to your project assets page and see a notification that the model was promoted to the deployment space successfully. Feel free to close that notification.
 
-## Save AutoAI notebooks
-
-In addition to saving models, we now have the ability to save a Jupyter notebook with working code. This can be the code representation of the AutoAI experiment (with access to all of the generated pipelines), or it can be the implementation of a specific pipeline. Let's explore how we can save both the experiment and a pipeline as a notebook.
-
-* To save the AutoAI experiment as a notebook, navigate back to the AutoAI experiment overview page by clicking on the AutoAI experiment name in your project assets page (under the `AutoAI experiments` section).
-
-* Click on the `Save code` link in the 'Progress map' section of the UI.
-
-    [![Save notebook](../images/autoai/autoai-experiment-save-code.png)](../images/autoai/autoai-experiment-save-code.png)
-
-* Leave the default name and click the `Create` button to save the experiment as a notebook.
-
-    [![Save notebook](../images/autoai/autoai-experiment-save-code-create.png)](../images/autoai/autoai-experiment-save-code-create.png)
-
-* To save the AutoAI pipeline as a notebook, from the experiment overview page, scroll down to the pipeline leader board section. Then hover over the right side of one of the other pipelines and click the resulting `Save as` button. For sake of demonstration, we are going to save a pipeline for an algorithm that is different from the model we saved in the previous section (i.e in this case Pipeline 7).
-
-    [![Save notebook](../images/autoai/autoai-pipeline-for-notebook.png)](../images/autoai/autoai-pipeline-for-notebook.png)
-
-* Choose the `Notebook` tile, accept the default name, add an optional description, and click the `Create` button.
-
-    [![Name and create notebook](../images/autoai/autoai-save-as-notebook.png)](../images/autoai/autoai-save-as-notebook.png)
-
-* You will receive a notification to indicate that your notebook is saved to your project. Close the notification and then click on your project name in the project path at the top of the screen.
-
-    [![Navigate to Project](../images/autoai/autoai-navigate-to-project.png)](../images/autoai/autoai-navigate-to-project.png)
-
-* The notebook will be saved to your project, and can be examined in detail, changed and modified, and used to create a new model. See the instructions in the [Modifying and running an AutoAI generated notebook](./running-autoai-notebook.md) lab for details.
 
 ## Conclusion
 

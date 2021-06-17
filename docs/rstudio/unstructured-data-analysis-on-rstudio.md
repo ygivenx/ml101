@@ -10,8 +10,28 @@ Working with R in RStudio within CPD and using examples from Pubmed, an analysis
 - Running demonstration LDA topic modeling over Pubmed abstracts
 - Additional topics
 
-### Additional Topics (as time allows)
+## Additional Topics (as time allows)
 
 - Document-level clustering with Carrot2, a web interface for clustering any set of documents with cluster topics titles based on any desired key fields.
 - Discussion of STC, Lingo, and Bisecting K-means algorithms.
 
+
+## Installing global dependencies
+
+For this module, additional had to be pre-installed. To [install global packages](https://www.ibm.com/support/producthub/icpdata/docs/content/SSQNUZ_latest/wsj/analyze-data/rstudio-packages.html) we used the following command:
+
+```
+install.packages("<package-name>", lib="/cc-home/_global_/R")
+```
+
+List of packages to be installed:
+
+* topicmodels
+* textmineR
+* LDAvis
+* servr
+* tidytext
+
+* Go the (☰) navigation menu, expand `Projects` and click on the `RStudioPubmedTopicModeling` project pre-created for this section.
+
+    [![(☰) Menu -> your project](../images/navigation/menu-projects.png)](../images/navigation/menu-projects.png)
