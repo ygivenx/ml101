@@ -23,7 +23,7 @@ For this module, additional had to be pre-installed. To [install global packages
 > install.packages("<package-name>", lib="/cc-home/_global_/R")
 ```
 
-This id the list of dependencies installed:
+This is the list of dependencies installed:
 
 * topicmodels
 * textmineR

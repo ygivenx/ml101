@@ -12,6 +12,6 @@ In this training you will be learning the basics of ML through IBM Cloud Pak for
 | :--- | :--- | :--- |
 | General Introduction | ML101 Introduction | Lecture |
 | Platform Overview | Cloud Pak for Data overview | Lecture |
-| AutoAI | Environment provisioning and setup | Hands-on lab |
-| Unstructured Data Analysis on R Studio | RStudio overview | Hands-on lab |
-| Custom Model Deployment | Deploying a custom model using Jupyter notebooks | Hands-on lab |
+| Incident Resolution with AutoAI | Predict incident resolution time using AutoAI | Hands-on lab |
+| Unstructured Data Analysis on R Studio | Use RStudio to train an LDA model based on pubmed data | Hands-on lab |
+| Breast Tumor Classification | Train a custom model using Jupyter notebooks | Hands-on lab |

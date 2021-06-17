@@ -21,8 +21,8 @@ nav:
       - Introduction: rstudio/README.md
       - Running RStudio: rstudio/topic-modeling.md
     - Breast Cancer Image Classification with Watson Studio Jupyter notebooks:
-      - Introduction: jupyter/custom-model-deployment.md
-      - Running Jupyter notebooks: jupyter/custom-model-deployment.md
+      - Introduction: jupyter/README.md
+      - Running Jupyter notebooks: jupyter/image-classification.md
   - Training Resources:
     - Resources: resources.md
 
