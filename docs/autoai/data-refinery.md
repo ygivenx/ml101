@@ -139,7 +139,7 @@ Let's do some visual exploration of our data using charts and graphs. Note that 
 
 * Histogram `assignment_group`
 
-[![Histogram](../images/dr/dr-vis-histogram.png)](../images/dr/dr-vis-histogram.png)
+[![Histogram](../images/dr/dr-vis-histogram.PNG)](../images/dr/dr-vis-histogram.PNG)
 
 ## Conclusion
 
